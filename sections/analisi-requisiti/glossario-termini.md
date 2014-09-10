@@ -14,7 +14,8 @@
 | contatore                        | strumento elettronico per la registrazione di dati    |                                                    | quadro elettrico    |
 | operatore                        | tecnico dell'agenzia                                  |                                                    |                     |
 | missione (*nota 2*)              | compito giornaliero assegnato a un operatore          | storico delle missioni                             | operatore           |
-| intervento                       | intervento su un singolo impianto                     |                                                    | operatore, impianto |
+| ispezione                        | ispezione a scopo informativo di un impianto          |                                                    | operatore, impianto |
+| intervento                       | intervento su un singolo impianto                     | intervento di manutenzione, manutenzione           | operatore, impianto |
 | lettura                          | insieme di dati misurati per un impianto              |                                                    | operatore, impianto |
 
 *Nota 1*: un **impianto** è un generico componente gestito dall'agenzia. Si

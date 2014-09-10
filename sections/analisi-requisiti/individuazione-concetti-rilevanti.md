@@ -42,7 +42,7 @@ quadro stesso, il numero di uscite disponibili, lo stato di funzionamento e le
 necessarie manutenzioni.  Bisogna anche conoscere quali sono gli impianti
 connessi e controllati da ciascun quadro di controllo. Si consideri che ogni
 quadro mediamente 20 impianti di illuminazione mentre ogni centralina semaforica
-controlla mediamente 4 semafori)
+controlla mediamente 4 semafori.
 
 Infine, per ogni *attraversamento pedonale*, si vuole sapere quale è l'impianto
 dedicato alla sua illuminazione.
@@ -50,7 +50,7 @@ dedicato alla sua illuminazione.
 L'azienda dispone di 40 **operatori**, identificati da una matricola e dalle
 relative informazioni anagrafiche, ai quali, giornalmente, viene assegnata una
 **missione** che consiste in una attività che può essere di installazione,
-censimento o manutenzione di uno o più impianti. Mediamente ogni viene impianto
+censimento o manutenzione di uno o più impianti. Mediamente ogni impianto viene
 ispezionato 4 volte all'anno.
 
 Si vuole mantenere uno storico delle missioni compiute da ogni operatore,
@@ -60,5 +60,5 @@ intervenuto, il tipo di **intervento** ed una sua descrizione.
 Infine si vogliono registrare le **letture** effettuate con periodicità mensile,
 nell'ambito delle missioni assegnate ad un operatore, relativamente ai consumi
 registrati dai contatori associati a ciascun quadro di controllo. Per ogni
-lettura si registrano i kilowattora indicati dal contatore, la data della
+lettura si registrano i kilowatt/ora indicati dal contatore, la data della
 lettura e l'operatore che l’ha effettuata.
