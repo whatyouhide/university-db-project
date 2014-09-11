@@ -117,18 +117,27 @@ numero di uscite libere sufficienti.
 I quadri di controllo sono caratterizzati [...] dai dati relativi al codice del
 contatore che registra i consumi degli impianti connessi al quadro stesso [...].
 
+<strike>Infine si vogliono registrare le letture effettuate con periodicità
+mensile [...] relativamente ai consumi registrati dai contatori associati a
+ciascun quadro di controllo.</strike>
+
+**Raffinamento specifica**: poiché in tutte le altre occasioni in cui viene
+nominato un contatore esso viene nominato "al singolare" per un dato quadro di
+controllo, si considera il precedente un errore semantico nei requisiti e si
+raffina la specifica nel modo seguente:
+
+> Infine si vogliono registrare le letture effettuate con periodicità mensile
+relativamente al consumo registrato dal contatore associato a ciascun quadro di
+controllo.
+
 *Operazione 5*: all'approssimarsi della scadenza mensile, si vuole produrre la
 lista di tutti i quadri di controllo per i quali è ancora necessario effettuare
 la lettura del contatore ovvero per i quali non è ancora disponibile una lettura
 aggiornata nel mese in corso.
 
-*Operazione 6*: al termine di una missione, si vuole produrre la lista di tutti
-gli impianti censiti, raggruppando quelli che richiedono interventi di
-manutenzione, in base alla tipologia di intervento (e.g. quelli che richiedono
-la sostituzione di lampade, quindi quelli che richiedono interventi sulle linee
-di alimentazione, ecc.) 7. Mensilmente si vuole calcolare il consumo registrato
-da ogni contatore (data evidentemente dalla differenza tra l'ultima lettura e
-quella precedente)
+*Operazione 7*: mensilmente si vuole calcolare il consumo registrato da ogni
+contatore (data evidentemente dalla differenza tra l'ultima lettura e quella
+precedente).
 
 ##### Frasi relative a "semaforo"
 
@@ -188,12 +197,11 @@ mese).
 data missione, bisognerà produrre la lista di tutti gli impianti ad esso
 connessi.
 
-*Operazione 6*: al termine di una missione, si vuole produrre la lista di tutti gli impianti
-censiti, raggruppando quelli che richiedono interventi di manutenzione, in base
-alla tipologia di intervento (e.g. quelli che richiedono la sostituzione di
-lampade, quindi quelli che richiedono interventi sulle linee di alimentazione,
-ecc.) 7. Mensilmente si vuole calcolare il consumo registrato da ogni contatore
-(data evidentemente dalla differenza tra l'ultima lettura e quella precedente)
+*Operazione 6*: al termine di una missione, si vuole produrre la lista di tutti
+gli impianti censiti, raggruppando quelli che richiedono interventi di
+manutenzione, in base alla tipologia di intervento (e.g. quelli che richiedono
+la sostituzione di lampade, quindi quelli che richiedono interventi sulle linee
+di alimentazione, ecc.)
 
 ##### Frasi relative a "intervento"
 
@@ -207,8 +215,7 @@ intervento ed una sua descrizione.
 censiti, raggruppando quelli che richiedono interventi di manutenzione, in base
 alla tipologia di intervento (e.g. quelli che richiedono la sostituzione di
 lampade, quindi quelli che richiedono interventi sulle linee di alimentazione,
-ecc.) 7. Mensilmente si vuole calcolare il consumo registrato da ogni contatore
-(data evidentemente dalla differenza tra l'ultima lettura e quella precedente)
+ecc.).
 
 *Operazione 9*: ogni giorno bisogna produrre la lista di tutti i lampioni che
 illuminano attraversamenti pedonali e che hanno necessità di interventi di
@@ -235,5 +242,4 @@ aggiornata nel mese in corso.
 censiti, raggruppando quelli che richiedono interventi di manutenzione, in base
 alla tipologia di intervento (e.g. quelli che richiedono la sostituzione di
 lampade, quindi quelli che richiedono interventi sulle linee di alimentazione,
-ecc.) 7. Mensilmente si vuole calcolare il consumo registrato da ogni contatore
-(data evidentemente dalla differenza tra l'ultima lettura e quella precedente)
+ecc.).

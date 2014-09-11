@@ -6,7 +6,7 @@
 | lampione                         | struttura per l'illuminazione di un'area ristretta    |                                                    |                     |
 | semaforo                         | strumento di regolazione del traffico                 |                                                    |                     |
 | segnale stradale                 | segnale informativo per gli automobilisti             | segnale stradale luminoso                          |                     |
-| quadro elettrico                 | strumento per il controllo di componenti              | quadro elettrico di controllo, quadro di controllo |                     |
+| quadro di controllo              | strumento per il controllo di componenti              | quadro elettrico di controllo, quadro elettrico    |                     |
 | attraversamento pedonale         | sezione della strada per l'attraversamento dei pedoni |                                                    |                     |
 | linea elettrica di alimentazione | componente che fornisce alimentazione                 | alimentazione                                      | impianto            |
 | sorgente di illuminazione        | componente che genera luce                            |                                                    | impianto            |
@@ -15,7 +15,7 @@
 | operatore                        | tecnico dell'agenzia                                  |                                                    |                     |
 | missione (*nota 2*)              | compito giornaliero assegnato a un operatore          | storico delle missioni                             | operatore           |
 | ispezione                        | ispezione a scopo informativo di un impianto          |                                                    | operatore, impianto |
-| intervento                       | intervento su un singolo impianto                     | intervento di manutenzione, manutenzione           | operatore, impianto |
+| intervento                       | intervento su un singolo impianto                     | intervento di manutenzione, manutenzione, attività | operatore, impianto |
 | lettura                          | insieme di dati misurati per un impianto              |                                                    | operatore, impianto |
 
 *Nota 1*: un **impianto** è un generico componente gestito dall'agenzia. Si

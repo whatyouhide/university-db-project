@@ -24,12 +24,12 @@ risultano essere:
     * `provincia`
     * <strike>regione</strike> [vedi nota]
 
-*Nota*: in Italia ogni provincia è identificata da una sigla di due lettere
-univoca. Siccome una provincia può ovviamente trovarsi in una sola regione,
-l'attributo "regione" dell'attributo composto "indirizzo completo" è depennato
-in quanto informazione ridondante. La scelta è giustificata anche dall'assenza
-di operazioni o altre sezioni dei requisiti che menzionano la "regione" in cui
-si trova un impianto.
+**Raffinamento specifica**: in Italia ogni provincia è identificata da una sigla
+di due lettere *univoca*. Siccome una provincia può ovviamente trovarsi in una
+sola regione, l'attributo `regione` dell'attributo composto `indirizzo completo`
+è depennato in quanto informazione ridondante. La scelta è giustificata anche
+dall'assenza di operazioni o altre sezioni dei requisiti che menzionano la
+"regione" in cui si trova un impianto.
 
 #### Promozione del concetto "sostegno" a entità
 
@@ -57,6 +57,12 @@ intervento di manutenzione richiesto", insieme a diversi altri riferimenti a
 del tipo "intervento di manutenzione" con cui diverse altre entità possano
 associarsi.
 
+**Vincolo**: il valore di `tipo` deve essere uno dei seguenti:
+
+- `"sostegno aereo"`
+- `"staffa a muro"`
+- `"palo a terra"`
+
 #### Associazione tra "impianto" e "sostegno"
 
 La frase
@@ -83,6 +89,12 @@ attributi:
 - `tipo_alimentazione` (pannello solare, linea bifase, linea trifase)
 - `in_pozzetto_di_derivazione`
 - `stato_di_conservazione`
+
+**Vincolo**: il valore di `tipo_alimentazione` deve essere uno dei seguenti:
+
+- `"pannello_solare"`
+- `"linea_bifase"`
+- `"linea_trifase"`
 
 Analogamente a come deciso per il sostegno, si è estratta l'entità "linea
 elettrica di alimentazione" (non rappresentandola come attributo composto di
@@ -177,14 +189,14 @@ descrive caratteristiche aggiuntive dell'entità (specializzazione di "impianto"
 
 **Vincolo**: siccome viene specificato che il sostegno che sorregge un quadro
 elettrico può essere anche immerso in un pozzetto (mentre i sostegni che
-sorreggono altri impianti non hanno questa opzione), si introduce il vincolo che
-un sostegno può essere di tipo "immerso in pozzetto" se e solo se è il sostegno
-che sorregge un determinato quadro elettrico.
+sorreggono altri impianti non hanno questa opzione), si aggiunge il tipo
+`"immerso in pozzetto"` ai tipi possibili per un impianto e si introduce il
+vincolo che un sostegno può essere di tipo "immerso in pozzetto" se e solo se è
+il sostegno che sorregge un determinato quadro elettrico.
 
 Siccome un contatore è sempre associato a uno e un solo quadro di controllo, e
-un quadro di controllo ha un solo contatore, si è deciso di rappresentare il
-concetto "contatore" non come entità a parte ma come attributo composto
-di "quadro di controllo".  
+un quadro di controllo ha un solo contatore, si è deciso di inglobare le
+caratteristiche del contatore direttamente nel relativo quadro di controllo.  
 Dopo aver discusso questa scelta con il cliente, il cliente si è trovato
 d'accordo a depennare il concetto di "codice" associato a un contatore e di
 inglobare le funzionalità del contatore direttamente nel "quadro di controllo",
@@ -193,8 +205,8 @@ intervento di manutenzione. Se ci fosse un problema al contatore, esso andrebbe
 semplicemente segnalato come problema del quadro di controllo di cui il
 contatore fa parte; analogamente per gli interventi di manutenzione.
 
-Un quadro di controllo avrà dunque i seguenti attributi (oltre a quelli
-"ereditati" dall'entità "impianto"):
+Un quadro di controllo avrà i seguenti attributi (oltre a quelli "ereditati"
+dall'entità "impianto"):
 
 - `numero_uscite`
 - `stato_di_funzionamento`
@@ -259,10 +271,9 @@ La frase
 > L'azienda dispone di 40 operatori, identificati da una matricola e dalle
 > relative informazioni anagrafiche [...].
 
-suggerisce la creazione di un'entità "operatore". Gli attributi elencati in
-seguito (che riguardano le informazioni anagrafiche) sono stati discussi con il
-cliente in modo da dettagliare il concetto piuttosto vago di "informazioni
-anagrafiche".
+identifica l'entità "operatore". Gli attributi elencati in seguito (che
+riguardano le informazioni anagrafiche) sono stati discussi con il cliente in
+modo da dettagliare il concetto piuttosto vago di "informazioni anagrafiche".
 
 - `matricola` (chiave)
 - `nome`
@@ -270,8 +281,98 @@ anagrafiche".
 - `data_di_nascita`
 - `cellulare`
 - `email`
-- `indirizzo_di_residenza`:
+- `indirizzo_di_residenza`
     * `via`
     * `numero_civico`
     * `comune`
     * `cap`
+
+#### Promozione del concetto "missione" a entità e "intervento" ad associazione
+
+La frase
+
+> operatori [...] ai quali, giornalmente, viene assegnata una missione che
+> consiste in una attività che può essere di installazione,
+> <strike>censimento</strike> [vedi *raffinamento specifica*] o manutenzione di
+> uno o più impianti.
+
+suggerisce la creazione di un'entità missione.
+
+Gli attributi di una missione consistono nel solo attributo `data`, ossia la
+data in cui viene svolta la missione.
+
+Una missione è costituita da più interventi (attività), ognuno dei quali è
+dedicato a un impianto. Si è scelto di rappresentare il concetto di "intervento"
+come un'associazione molti a molti tra "impianto" e "missione".
+
+*Raffinamento specifica*: l'operazione 6:
+
+> Al termine di una missione, si vuole produrre la lista di tutti gli impianti
+> censiti, raggruppando quelli che richiedono interventi di manutenzione, in
+> base alla tipologia di intervento (e.g. quelli che richiedono la sostituzione
+> di lampade, quindi quelli che richiedono interventi sulle linee di
+> alimentazione, ecc.).
+
+ (in particolare "impianti censiti suggerisce che il
+"censimento" non sia in realtà un tipo di intervento, bensì sia l'intervento
+stesso: un intervento (di qualsiasi tipo) è implicitamente un'attività di
+censimento di uno specifico impianto, dunque "censimento" non viene identificato
+come tipo di intervento e viene depennato dalla specifica.
+
+L'associazione "intervento" avrà gli attributi:
+
+- `tipo`: il tipo di intervento (manutenzione o installazione);
+- `tipologia_manutenzione`: l'operazione 6 (citata su) richiede che gli
+    interventi *di manutenzione* vengano raggruppati tramite tipologia.
+- `descrizione`: una descrizione dell'intervento effettuato da parte
+    dell'operatore. Questo attributo assumerà il valore nullo finché
+    l'intervento non verrà effettivamente svolto da un operatore.
+
+**Vincolo**: a causa dell'attributo `tipologia_manutenzione`, si introduce un
+vincolo che richiede che `tipologia_manutenzione` sia nullo per un intervento
+quando l'attributo `tipo` dello stesso intervento è diverso da "manutenzione".
+
+La frase
+
+> Mediamente ogni impianto viene ispezionato 4 volte all'anno.
+
+suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
+
+**Vincolo**: riassumento, le possibili tipologie di intervento sono:
+
+- `"installazione"`
+- `"manutenzione"`
+- `"ispezione"`
+
+#### Associazione tra "missione" e "operatore"
+
+A ogni operatore viene giornalmente assegnata una missione e si è dunque scelto
+di creare l'associazione "assegnamento" tra queste due entità.  
+Considerando l'associazione come molti a molti, si riesce a rappresentare in
+modo compatto il concetto di "storico" delle missioni, come richiesto dalla
+frase:
+
+> Si vuole mantenere uno storico delle missioni [...] registrando [...] il tipo
+> di intervento ed una sua descrizione.
+
+È possibile identificare la missione assegnata a un operatore in un dato giorno
+basandosi soltanto sull'attributo `data` della missione; per ottenere lo storico
+delle missioni di un operatore basta invece cercare tutte le missioni di
+quell'operatore con `data` precedente a quella del giorno corrente.
+
+#### Promozione del concetto di "lettura" ad associazione
+
+La frase
+
+> Infine si vogliono registrare le letture effettuate con periodicità mensile,
+> nell'ambito delle missioni assegnate ad un operatore, relativamente ai consumi
+> registrati dai contatori associati a ciascun quadro di controllo. Per ogni
+> lettura si registrano i kilowatt/ora indicati dal contatore, la data della
+> lettura e l'operatore che l’ha effettuata.
+
+suggerisce la creazione di un'associazione "lettura" tra "operatore" e "quadro
+elettrico".
+L'associazione è del tipo molti a molti e ha gli attributi:
+
+- `data`
+- `kilowatt_ora` (al momento della lettura)
