@@ -10,3 +10,7 @@
 ## Strutturazione dei requisiti
 
 <<[sections/strutturazione-requisiti/decomposizione-in-frasi.md]
+
+## Schema concettuale
+
+<<[sections/schema-concettuale/entita.md]

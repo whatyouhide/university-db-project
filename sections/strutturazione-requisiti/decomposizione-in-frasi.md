@@ -18,6 +18,8 @@ dati di localizzazione, ovvero dalle coordinate GPS e da un indirizzo completo
 sul sostegno sul quale l'impianto stesso è montato; caratteristiche della linea
 elettrica di alimentazione e le caratteristiche delle sorgenti di illuminazione.
 
+[...] si vuole conoscere a quale altezza è montato l'impianto.
+
 Bisogna anche conoscere quali sono gli impianti connessi e controllati da
 ciascun quadro di controllo.
 
@@ -137,7 +139,7 @@ centralina semaforica controlla mediamente 4 semafori.
 
 *Operazione 9*: ogni giorno bisogna produrre la lista di tutti i lampioni che
 illuminano attraversamenti pedonali e che hanno necessità di interventi di
-manutenzione.
+manutenzione. [vedi *nota* sotto *Frasi relative a "attraversamento pedonale"]
 
 ##### Frasi relative a "attraversamento pedonale"
 
