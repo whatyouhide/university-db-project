@@ -4,36 +4,35 @@ La frase
 
 > Ogni impianto è identificato da una codice univoco ed è caratterizzato da: i
 > dati di localizzazione, ovvero dalle coordinate GPS e da un indirizzo completo
-> (via, numero civico di riferimento, comune, provincia e regione) [...].
+> (via, numero civico di riferimento, comune, provincia e
+> <strike>regione</strike>) [vedi raffinamento specifica] [...].
 
 e la frase
 
 > [...] si vuole conoscere a quale altezza è montato l'impianto.
 
-suggeriscono la creazione di un'entità impianto e ne descrive gli attributi, che
-risultano essere:
+suggeriscono la creazione di un'entità impianto con i seguenti attributi:
 
-- `codice` (che identifica un impianto, e dunque può essere la *chiave
-    primaria*)
-- coordinate GPS (`latitudine` e `longitudine`)
+- `codice` (che identifica un impianto)
+- `latitudine`
+- `longitudine`
 - `altezza`
 - `indirizzo`
     * `via`
     * `numero_civico_di_riferimento`
     * `comune`
     * `provincia`
-    * <strike>regione</strike> [vedi nota]
 
 **Raffinamento specifica**: in Italia ogni provincia è identificata da una sigla
-di due lettere *univoca*. Siccome una provincia può ovviamente trovarsi in una
-sola regione, l'attributo `regione` dell'attributo composto `indirizzo completo`
-è depennato in quanto informazione ridondante. La scelta è giustificata anche
-dall'assenza di operazioni o altre sezioni dei requisiti che menzionano la
-"regione" in cui si trova un impianto.
+di due lettere *univoca*. Siccome una provincia può trovarsi in una sola
+regione, l'attributo `regione` dell'attributo composto `indirizzo` è depennato
+in quanto informazione ridondante. La scelta è giustificata anche dall'assenza
+di operazioni o altre sezioni dei requisiti che menzionano la "regione" in cui
+si trova un impianto.
 
-#### Promozione del concetto "sostegno" a entità
+##### Sostegno
 
-La frase
+Nonostante la frase
 
 > I sostegni possono essere di diverso tipo (sostegni aerei, staffe a muro o
 > pali a terra), di diverso materiale e si vuole conoscere a quale altezza è
@@ -41,40 +40,31 @@ La frase
 > conservazione e una descrizione dell'eventuale intervento di manutenzione
 > richiesto.
 
-suggerisce la creazione di un'entità "sostegno" e ne identifica gli attributi:
+possa suggerire la creazione di un'entità "sostegno", essa non avrebbe poi
+associazioni con altre entità (se non con "impianto") e sarebbe identificata
+dalla sola associazione che avrebbe con "impianto". Si è deciso dunque di
+rappresentarla come attributo composto di impianto. Di seguito l'attributo
+composto con i suoi sotto-attributi:
 
-- `tipo` (sostegno aereo, staffa a muro, palo a terra)
-- `materiale`
-- `stato_di_conservazione`
+- `sostegno`
+    * `tipo`
+    * `materiale`
+    * `stato_di_conservazione`
+    * `descrizione_intervento_richiesto`
 
-Come si vedrà a breve, un sostegno è identificato univocamente dalla sua
-relazione con un impianto.
+*Nota*: `descrizione_intervento_richiesto` potrà assumere il valore nullo, ad
+indicare che non è richiesto alcun intervento. La presenza di una descrizione
+segnalerà dunque che è richiesto un intervento per il sostegno. Questo varrà
+anche per le situazioni analoghe incontrate successivamente.
 
-Un sostegno potrebbe essere rappresentato anche come un attributo composto di un
-impianto. Tuttavia, la specifica che riguarda la "descrizione dell'eventuale
-intervento di manutenzione richiesto", insieme a diversi altri riferimenti a
-"interventi di manutenzione" nei requisiti, suggerisce la creazione di un'entità
-del tipo "intervento di manutenzione" con cui diverse altre entità possano
-associarsi.
-
-**Vincolo**: il valore di `tipo` deve essere uno dei seguenti:
+**Vincolo**: il valore di `tipo` dell'attributo composto `sostegno` deve essere
+uno dei seguenti:
 
 - `"sostegno aereo"`
 - `"staffa a muro"`
 - `"palo a terra"`
 
-#### Associazione tra "impianto" e "sostegno"
-
-La frase
-
-> Ogni impianto è caratterizzato da [...] informazioni sul sostegno sul quale
-> l'impianto stesso è montato.
-
-suggerisce la creazione di un'associazione "sostenimento" tra un "impianto" e un
-"sostegno". Ogni impianto ha un sostegno e ogni sostegno appartiene ad un solo
-impianto, dunque la relazione è del tipo *uno a uno*.
-
-#### Promozione del concetto di "linea elettrica di alimentazione" a entità
+##### Linea elettrica di alimentazione
 
 La frase
 
@@ -83,12 +73,14 @@ La frase
 > pozzetto di derivazione e [...] lo stato di conservazione e l'eventuale
 > manutenzione richiesta.
 
-suggerisce la creazione di un'entità "linea elettrica di alimentazione" con gli
-attributi:
+suggerisce la creazione di un altro attributo composto di impianto, ovvero
+`linea_elettrica_di_alimentazione`. La struttura del nuovo attributo composto è:
 
-- `tipo_alimentazione` (pannello solare, linea bifase, linea trifase)
-- `in_pozzetto_di_derivazione`
-- `stato_di_conservazione`
+- `linea_elettrica_di_alimentazione`
+    * `tipo_alimentazione`
+    * `in_pozzetto_di_derivazione`
+    * `stato_di_conservazione`
+    * `descrizione_intervento_richiesto` [vedi *nota* in *Sostegno*]
 
 **Vincolo**: il valore di `tipo_alimentazione` deve essere uno dei seguenti:
 
@@ -96,64 +88,45 @@ attributi:
 - `"linea_bifase"`
 - `"linea_trifase"`
 
-Analogamente a come deciso per il sostegno, si è estratta l'entità "linea
-elettrica di alimentazione" (non rappresentandola come attributo composto di
-impianto) in modo da poterla in seguito associare a un "intervento di
-manutenzione".
+##### Sorgente di illuminazione
 
-La frase
+Le frasi
 
-> Ogni impianto [...] è caratterizzato da [...] caratteristiche della linea
-> elettrica di alimentazione.
+> Ogni impianto [...] è caratterizzato da [...] caratteristiche delle sorgenti
+> di illuminazione.
 
-indica un'associazione "alimentazione" tra un "impianto" e una "linea elettrica
-di alimentazione", di cardinalità uno a uno e che serve da chiave univoca per
-l'entità "linea elettrica di alimentazione".
-
-#### Promozione del concetto "sorgente di illuminazione" a entità
-
-La frase
+e
 
 > Relativamente alle sorgenti di illuminazione se ne vuole conoscere il numero,
 > il tipo di lampade utilizzate, il loro stato di funzionamento e quante è
 > necessario sostituirne.
 
-suggerisce la creazione di un'entità "sorgente di illuminazione". Nonostante la
-specifica possa far intendere che a ogni sorgente di illuminazione appartengono più
-lampade, una **discussione con il cliente** ha chiarito questo aspetto: a ogni
-sorgente di illuminazione corrisponde una lampada -- o meglio, ogni sorgente di
-illuminazione *è* una lampada.  
-La relazione uno a molti è tra un impianto e un insieme di sorgenti di
-illuminazione.
+suggeriscono la creazione di un attributo composto `sorgente_di_illuminazione` con
+cardinalità `1...N`.
 
-*Raffinamento specifica*: l'attributo "numero di lampade da sostituire" è stato
-depennato in favore di un attributo `da_sostituire` (booleano) dell'entità
-"sorgente di illuminazione". Sarà comunque possibile contare il numero di
+Nonostante la specifica possa far intendere che a ogni sorgente di illuminazione
+appartengono più lampade, una discussione con il cliente ha chiarito questo
+aspetto: a ogni sorgente di illuminazione corrisponde una lampada -- o meglio,
+ogni sorgente di illuminazione *è* una lampada.
+
+**Raffinamento specifica**: l'attributo "numero di lampade da sostituire" è
+stato depennato in favore di un attributo `da_sostituire` (booleano) di
+`sorgente_di_illuminazione`. Sarà comunque possibile contare il numero di
 sorgenti di illuminazione associate a un dato impianto che sono da sostituire.
 
-Gli attributi dell'entità "sorgente di illuminazione" risultano dunque essere:
+L'attributo composto `sorgente_di_illuminazione` è strutturato nel modo
+seguente:
 
-- `tipo_lampada`
-- `stato_di_funzionamento`
-- `da_sostituire`
+- `sorgente_di_illuminazione`
+    * `tipo_lampada`
+    * `stato_di_funzionamento`
+    * `da_sostituire`
 
-Inoltre si aggiunge un attributo `id` (intero) che identifichi univocamente una
-"sorgente di illuminazione".
-
-La frase
-
-> Ogni impianto [...] è caratterizzato da [...] caratteristiche delle sorgenti
-> di illuminazione.
-
-suggerisce la creazione di un'associazione "illuminazione" tra "impianto" e
-"sorgente di illuminazione". L'associazione ha cardinalità uno a molti (un
-impianto può avere più sorgenti di illuminazione).
-
-**Vincolo**: dopo averne discusso con il cliente, si è dedotto che tra tutti gli
+**Vincolo**: dopo aver discusso con il cliente, si è dedotto che, tra tutti gli
 impianti, i "quadri di controllo" non hanno alcuna sorgente di illuminazione
-(per loro natura). Si introduce dunque il vincolo che impone che solo impianti
-che non siano "quadri di controllo" possono partecipare all'associazione
-"illuminazione".
+(per loro natura). Si introduce dunque il vincolo che impone che i "quadri di
+controllo" debbano avere l'attributo composto `sorgente_di_illuminazione` con
+valore nullo.
 
 #### Gerarchia con radice "impianto"
 
@@ -184,32 +157,34 @@ La frase
 > connessi al quadro stesso, il numero di uscite disponibili, lo stato di
 > funzionamento e le necessarie manutenzioni.
 
-descrive caratteristiche aggiuntive dell'entità (specializzazione di "impianto")
-"quadro di controllo".
+descrive caratteristiche aggiuntive dell'entità "quadro di controllo"
+(specializzazione di "impianto").
+
 
 **Vincolo**: siccome viene specificato che il sostegno che sorregge un quadro
 elettrico può essere anche immerso in un pozzetto (mentre i sostegni che
 sorreggono altri impianti non hanno questa opzione), si aggiunge il tipo
-`"immerso in pozzetto"` ai tipi possibili per un impianto e si introduce il
-vincolo che un sostegno può essere di tipo "immerso in pozzetto" se e solo se è
-il sostegno che sorregge un determinato quadro elettrico.
+`"immerso in pozzetto"` ai tipi possibili per un sostegno e si introduce il
+vincolo che un sostegno può essere di tipo `"immerso in pozzetto"` se e solo se
+è il sostegno che sorregge un quadro elettrico.
 
 Siccome un contatore è sempre associato a uno e un solo quadro di controllo, e
 un quadro di controllo ha un solo contatore, si è deciso di inglobare le
-caratteristiche del contatore direttamente nel relativo quadro di controllo.  
+caratteristiche del contatore direttamente nel relativo quadro di controllo.
 Dopo aver discusso questa scelta con il cliente, il cliente si è trovato
 d'accordo a depennare il concetto di "codice" associato a un contatore e di
-inglobare le funzionalità del contatore direttamente nel "quadro di controllo",
+inglobare le funzionalità del contatore direttamente nel quadro di controllo,
 specialmente per quanto riguarda lo stato di funzionamento e la necessità di un
 intervento di manutenzione. Se ci fosse un problema al contatore, esso andrebbe
 semplicemente segnalato come problema del quadro di controllo di cui il
 contatore fa parte; analogamente per gli interventi di manutenzione.
 
-Un quadro di controllo avrà i seguenti attributi (oltre a quelli "ereditati"
+Un quadro di controllo avrà i seguenti attributi (oltre a quelli ereditati
 dall'entità "impianto"):
 
 - `numero_uscite`
 - `stato_di_funzionamento`
+- `descrizione_intervento_richiesto`
 
 #### Associazione tra "quadro di controllo" e "impianto"
 
@@ -226,7 +201,7 @@ da un solo quadro di controllo, che a sua volta controlla molti impianti.
 controllo è allo stesso tempo una specializzazione di "impianto". Poiché un
 quadro di controllo non può controllare sé stesso o altri quadri di controllo
 (un quadro di controllo non ha bisogno di essere "controllato"), si introduce il
-vincolo che gli impianti che partecipano alla relazione "controllo" non possono
+vincolo che gli impianti che partecipano alla relazione "controllo" non possano
 essere quadri di controllo.
 
 #### Depennamento di "centralina semaforica"
@@ -237,7 +212,8 @@ La frase
 > ogni centralina semaforica controlla mediamente 4 semafori.
 
 suggerirebbe che "centralina semaforica" sia un concetto diverso (se pur
-fortemente correlato) da "quadro di controllo".  
+fortemente correlato) da "quadro di controllo".
+
 Confrontando la specifica con il cliente, si è convenuti che "centralina
 semaforica" non è altro che un quadro di controllo che controlla soltanto
 semafori. Nella specifica non ci si riferisce mai (se non nella frase appena
@@ -250,19 +226,12 @@ soltanto semafori".
 
 L'operazione 9:
 
-> ogni giorno bisogna produrre la lista di tutti i lampioni che illuminano
+> Ogni giorno bisogna produrre la lista di tutti i lampioni che illuminano
 > attraversamenti pedonali e che hanno necessità di interventi di manutenzione.
 
 suggerisce la creazione di un'associazione "illuminazione attraversamento" tra
 "attraversamento pedonale" e "lampione" che indica quale lampione illumina un
-dato attraversamento pedonale. La relazione ha dunque cardinalità uno a uno.
-
-*Nota*: è facile confondere le associazioni "illuminazione" (tra sorgente di
-illuminazione e impianto, dunque anche attraversamento pedonale) e
-l'associazione "illuminazione attraversamento" appena descritta. Si noti che
-esse sono semanticamente diverse: mentre la prima indica, ad esempio, le lampade
-"verde, gialla e rossa" di un attraversamento pedonale, la seconda indica quale
-lampione illumina l'area in cui si trova l'attraversamento pedonale.
+dato attraversamento pedonale. L'associazione ha dunque cardinalità uno a uno.
 
 #### Promozione del concetto "operatore" a entità
 
@@ -275,11 +244,11 @@ identifica l'entità "operatore". Gli attributi elencati in seguito (che
 riguardano le informazioni anagrafiche) sono stati discussi con il cliente in
 modo da dettagliare il concetto piuttosto vago di "informazioni anagrafiche".
 
-- `matricola` (chiave)
+- `matricola` (univoca)
 - `nome`
 - `cognome`
 - `data_di_nascita`
-- `cellulare`
+- `cellulare` (`[1...N]`)
 - `email`
 - `indirizzo_di_residenza`
     * `via`
@@ -313,11 +282,11 @@ come un'associazione molti a molti tra "impianto" e "missione".
 > di lampade, quindi quelli che richiedono interventi sulle linee di
 > alimentazione, ecc.).
 
- (in particolare "impianti censiti suggerisce che il
-"censimento" non sia in realtà un tipo di intervento, bensì sia l'intervento
-stesso: un intervento (di qualsiasi tipo) è implicitamente un'attività di
-censimento di uno specifico impianto, dunque "censimento" non viene identificato
-come tipo di intervento e viene depennato dalla specifica.
+(in particolare "impianti censiti") suggerisce che il "censimento" non sia in
+realtà un tipo di intervento, bensì sia l'intervento stesso: un intervento (di
+qualsiasi tipo) è implicitamente un'attività di censimento di uno specifico
+impianto, dunque "censimento" non viene identificato come tipo di intervento e
+viene depennato dalla specifica.
 
 L'associazione "intervento" avrà gli attributi:
 
@@ -338,7 +307,7 @@ La frase
 
 suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
 
-**Vincolo**: riassumento, le possibili tipologie di intervento sono:
+**Vincolo**: riassumendo, le possibili tipologie di intervento sono:
 
 - `"installazione"`
 - `"manutenzione"`
@@ -348,9 +317,9 @@ suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
 
 A ogni operatore viene giornalmente assegnata una missione e si è dunque scelto
 di creare l'associazione "assegnamento" tra queste due entità.  
-Considerando l'associazione come molti a molti, si riesce a rappresentare in
-modo compatto il concetto di "storico" delle missioni, come richiesto dalla
-frase:
+Considerando l'associazione come molti a molti, si riesce a rappresentare, in
+modo compatto, anche il concetto di "storico" delle missioni, come richiesto
+dalla frase:
 
 > Si vuole mantenere uno storico delle missioni [...] registrando [...] il tipo
 > di intervento ed una sua descrizione.
@@ -366,13 +335,17 @@ La frase
 
 > Infine si vogliono registrare le letture effettuate con periodicità mensile,
 > nell'ambito delle missioni assegnate ad un operatore, relativamente ai consumi
-> registrati dai contatori associati a ciascun quadro di controllo. Per ogni
+> registrati dal contatore associato a ciascun quadro di controllo. Per ogni
 > lettura si registrano i kilowatt/ora indicati dal contatore, la data della
 > lettura e l'operatore che l’ha effettuata.
 
-suggerisce la creazione di un'associazione "lettura" tra "operatore" e "quadro
-elettrico".
-L'associazione è del tipo molti a molti e ha gli attributi:
+suggerisce la creazione di un'entità "lettura", con gli attributi:
 
-- `data`
-- `kilowatt_ora` (al momento della lettura)
+- `kilowatt_ora`
+
+Per poter associare una data, una missione e un operatore a una lettura, si è
+deciso di far partecipare l'entità "lettura" all'associazione "intervento".
+
+**Vincolo**: questa scelta comporta il vincolo che impone che un'istanza di
+"lettura" partecipi a un'associazione "intervento" se e solo se l'impianto che
+partecipa alla stessa associazione è un "quadro di controllo".
