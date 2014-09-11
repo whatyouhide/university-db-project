@@ -23,7 +23,7 @@ suggeriscono la creazione di un'entità impianto con i seguenti attributi:
     * `comune`
     * `provincia`
 
-**Raffinamento specifica**: in Italia ogni provincia è identificata da una sigla
+**Raffinamento specifica** in Italia ogni provincia è identificata da una sigla
 di due lettere *univoca*. Siccome una provincia può trovarsi in una sola
 regione, l'attributo `regione` dell'attributo composto `indirizzo` è depennato
 in quanto informazione ridondante. La scelta è giustificata anche dall'assenza
@@ -57,7 +57,7 @@ indicare che non è richiesto alcun intervento. La presenza di una descrizione
 segnalerà dunque che è richiesto un intervento per il sostegno. Questo varrà
 anche per le situazioni analoghe incontrate successivamente.
 
-**Vincolo**: il valore di `tipo` dell'attributo composto `sostegno` deve essere
+**Vincolo** il valore di `tipo` dell'attributo composto `sostegno` deve essere
 uno dei seguenti:
 
 - `"sostegno aereo"`
@@ -82,7 +82,7 @@ suggerisce la creazione di un altro attributo composto di impianto, ovvero
     * `stato_di_conservazione`
     * `descrizione_intervento_richiesto` [vedi *nota* in *Sostegno*]
 
-**Vincolo**: il valore di `tipo_alimentazione` deve essere uno dei seguenti:
+**Vincolo** il valore di `tipo_alimentazione` deve essere uno dei seguenti:
 
 - `"pannello_solare"`
 - `"linea_bifase"`
@@ -109,7 +109,7 @@ appartengono più lampade, una discussione con il cliente ha chiarito questo
 aspetto: a ogni sorgente di illuminazione corrisponde una lampada -- o meglio,
 ogni sorgente di illuminazione *è* una lampada.
 
-**Raffinamento specifica**: l'attributo "numero di lampade da sostituire" è
+**Raffinamento specifica** l'attributo "numero di lampade da sostituire" è
 stato depennato in favore di un attributo `da_sostituire` (booleano) di
 `sorgente_di_illuminazione`. Sarà comunque possibile contare il numero di
 sorgenti di illuminazione associate a un dato impianto che sono da sostituire.
@@ -119,14 +119,17 @@ seguente:
 
 - `sorgente_di_illuminazione`
     * `tipo_lampada`
-    * `stato_di_funzionamento`
+    * `stato_di_conservazione` (e non "stato di funzionamento", per omogeneità
+        col resto del sistema)
     * `da_sostituire`
 
-**Vincolo**: dopo aver discusso con il cliente, si è dedotto che, tra tutti gli
+**Vincolo** dopo aver discusso con il cliente, si è dedotto che, tra tutti gli
 impianti, i "quadri di controllo" non hanno alcuna sorgente di illuminazione
 (per loro natura). Si introduce dunque il vincolo che impone che i "quadri di
 controllo" debbano avere l'attributo composto `sorgente_di_illuminazione` con
 valore nullo.
+
+![](images/entita-impianto.png)
 
 #### Gerarchia con radice "impianto"
 
@@ -143,8 +146,10 @@ radice e le seguenti specializzazioni:
 - lampione
 - semaforo
 - segnale stradale
-- quadro elettrico
+- quadro di controllo
 - attraversamento pedonale
+
+![](images/gerarchia-impianto.png)
 
 #### Caratteristiche aggiuntive di "quadro di controllo"
 
@@ -161,12 +166,12 @@ descrive caratteristiche aggiuntive dell'entità "quadro di controllo"
 (specializzazione di "impianto").
 
 
-**Vincolo**: siccome viene specificato che il sostegno che sorregge un quadro
+**Vincolo** siccome viene specificato che il sostegno che sorregge un quadro
 elettrico può essere anche immerso in un pozzetto (mentre i sostegni che
 sorreggono altri impianti non hanno questa opzione), si aggiunge il tipo
 `"immerso in pozzetto"` ai tipi possibili per un sostegno e si introduce il
 vincolo che un sostegno può essere di tipo `"immerso in pozzetto"` se e solo se
-è il sostegno che sorregge un quadro elettrico.
+è il sostegno che sorregge un quadro di controllo.
 
 Siccome un contatore è sempre associato a uno e un solo quadro di controllo, e
 un quadro di controllo ha un solo contatore, si è deciso di inglobare le
@@ -186,6 +191,8 @@ dall'entità "impianto"):
 - `stato_di_funzionamento`
 - `descrizione_intervento_richiesto`
 
+![](images/entita-quadro-di-controllo.png)
+
 #### Associazione tra "quadro di controllo" e "impianto"
 
 La frase
@@ -197,12 +204,14 @@ indica un'associazione "controllo" tra l'entità "quadro di controllo" e l'entit
 "impianto". L'associazione ha cardinalità uno a molti: un impianto è controllato
 da un solo quadro di controllo, che a sua volta controlla molti impianti.
 
-**Vincolo**: un quadro di controllo controlla impianti, ma un quadro di
+**Vincolo** un quadro di controllo controlla impianti, ma un quadro di
 controllo è allo stesso tempo una specializzazione di "impianto". Poiché un
 quadro di controllo non può controllare sé stesso o altri quadri di controllo
 (un quadro di controllo non ha bisogno di essere "controllato"), si introduce il
 vincolo che gli impianti che partecipano alla relazione "controllo" non possano
 essere quadri di controllo.
+
+![](images/associazione-controllo.png)
 
 #### Depennamento di "centralina semaforica"
 
@@ -229,9 +238,11 @@ L'operazione 9:
 > Ogni giorno bisogna produrre la lista di tutti i lampioni che illuminano
 > attraversamenti pedonali e che hanno necessità di interventi di manutenzione.
 
-suggerisce la creazione di un'associazione "illuminazione attraversamento" tra
-"attraversamento pedonale" e "lampione" che indica quale lampione illumina un
-dato attraversamento pedonale. L'associazione ha dunque cardinalità uno a uno.
+suggerisce la creazione di un'associazione "illuminazione" tra "attraversamento
+pedonale" e "lampione" che indica quale lampione illumina un dato
+attraversamento pedonale. L'associazione ha dunque cardinalità uno a uno.
+
+![](images/associazione-illuminazione.png)
 
 #### Promozione del concetto "operatore" a entità
 
@@ -248,13 +259,15 @@ modo da dettagliare il concetto piuttosto vago di "informazioni anagrafiche".
 - `nome`
 - `cognome`
 - `data_di_nascita`
-- `cellulare` (`[1...N]`)
+- `telefono` (`[1...N]`)
 - `email`
 - `indirizzo_di_residenza`
     * `via`
     * `numero_civico`
     * `comune`
     * `cap`
+
+![](images/entita-operatore.png)
 
 #### Promozione del concetto "missione" a entità e "intervento" ad associazione
 
@@ -274,7 +287,7 @@ Una missione è costituita da più interventi (attività), ognuno dei quali è
 dedicato a un impianto. Si è scelto di rappresentare il concetto di "intervento"
 come un'associazione molti a molti tra "impianto" e "missione".
 
-*Raffinamento specifica*: l'operazione 6:
+**Raffinamento specifica** l'operazione 6:
 
 > Al termine di una missione, si vuole produrre la lista di tutti gli impianti
 > censiti, raggruppando quelli che richiedono interventi di manutenzione, in
@@ -297,7 +310,7 @@ L'associazione "intervento" avrà gli attributi:
     dell'operatore. Questo attributo assumerà il valore nullo finché
     l'intervento non verrà effettivamente svolto da un operatore.
 
-**Vincolo**: a causa dell'attributo `tipologia_manutenzione`, si introduce un
+**Vincolo** a causa dell'attributo `tipologia_manutenzione`, si introduce un
 vincolo che richiede che `tipologia_manutenzione` sia nullo per un intervento
 quando l'attributo `tipo` dello stesso intervento è diverso da "manutenzione".
 
@@ -307,11 +320,32 @@ La frase
 
 suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
 
-**Vincolo**: riassumendo, le possibili tipologie di intervento sono:
+**Vincolo** riassumendo, le possibili tipologie di intervento sono:
 
 - `"installazione"`
 - `"manutenzione"`
 - `"ispezione"`
+
+##### Lettura
+
+La frase
+
+> Infine si vogliono registrare le letture effettuate con periodicità mensile,
+> nell'ambito delle missioni assegnate ad un operatore, relativamente ai consumi
+> registrati dal contatore associato a ciascun quadro di controllo. Per ogni
+> lettura si registrano i kilowatt/ora indicati dal contatore, la data della
+> lettura e l'operatore che l’ha effettuata.
+
+suggerisce l'aggiunta di un attributo `lettura_kilowatt_ora` (con possibile valore
+nullo) all'associazione "intervento". In questo modo, la lettura dei
+kilowatt/ora è associata a una missione (dunque una data e un operatore) e a un
+intervento (e dunque a un impianto).
+
+**Vincolo** l'attributo `lettura_kilowatt_ora` dell'associazione "intervento" può essere
+non nullo se e solo se l'intervento in questione è associato a un impianto di
+tipologia "quadro di controllo".
+
+![](images/entita-missione-associazione-intervento.png)
 
 #### Associazione tra "missione" e "operatore"
 
@@ -329,23 +363,4 @@ basandosi soltanto sull'attributo `data` della missione; per ottenere lo storico
 delle missioni di un operatore basta invece cercare tutte le missioni di
 quell'operatore con `data` precedente a quella del giorno corrente.
 
-#### Promozione del concetto di "lettura" ad associazione
-
-La frase
-
-> Infine si vogliono registrare le letture effettuate con periodicità mensile,
-> nell'ambito delle missioni assegnate ad un operatore, relativamente ai consumi
-> registrati dal contatore associato a ciascun quadro di controllo. Per ogni
-> lettura si registrano i kilowatt/ora indicati dal contatore, la data della
-> lettura e l'operatore che l’ha effettuata.
-
-suggerisce la creazione di un'entità "lettura", con gli attributi:
-
-- `kilowatt_ora`
-
-Per poter associare una data, una missione e un operatore a una lettura, si è
-deciso di far partecipare l'entità "lettura" all'associazione "intervento".
-
-**Vincolo**: questa scelta comporta il vincolo che impone che un'istanza di
-"lettura" partecipi a un'associazione "intervento" se e solo se l'impianto che
-partecipa alla stessa associazione è un "quadro di controllo".
+![](images/associazione-assegnamento.png)
