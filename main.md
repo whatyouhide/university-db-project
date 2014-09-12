@@ -14,7 +14,5 @@
 ## Schema concettuale
 
 <<[sections/schema-concettuale/entita-e-associazioni.md]
-
-## Ristrutturazione specifiche
-
-<<[sections/ristrutturazione-specifiche/frasi.md]
+<<[sections/schema-concettuale/ristrutturazione-frasi.md]
+<<[sections/schema-concettuale/diagramma-er.md]

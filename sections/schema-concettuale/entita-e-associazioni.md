@@ -1,3 +1,5 @@
+### Entità e associazioni
+
 #### Promozione del concetto "impianto" a entità
 
 La frase

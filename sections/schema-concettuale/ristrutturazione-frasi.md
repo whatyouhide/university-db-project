@@ -1,4 +1,4 @@
-### Ristrutturazione frasi
+### Ristrutturazione delle specifiche
 
 ##### Frasi di carattere generale
 
