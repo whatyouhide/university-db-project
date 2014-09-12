@@ -270,7 +270,7 @@ modo da dettagliare il concetto piuttosto vago di "informazioni anagrafiche".
 
 ![](images/entita-operatore.png)
 
-#### Promozione del concetto "missione" a entità e "intervento" ad associazione
+#### Promozione del concetto "missione" a entità, "intervento" e "lettura" ad associazioni
 
 La frase
 
@@ -314,7 +314,9 @@ suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
 - `"manutenzione"`
 - `"ispezione"`
 
-##### Lettura
+![](images/entita-missione-associazione-intervento.png)
+
+#### Promozione del concetto di "lettura" ad associazione
 
 La frase
 
@@ -324,18 +326,25 @@ La frase
 > lettura si registrano i kilowatt/ora indicati dal contatore, la data della
 > lettura e l'operatore che l’ha effettuata.
 
-suggerisce l'aggiunta di un attributo `lettura_kilowatt_ora` (con possibile valore
-nullo) all'associazione "intervento". In questo modo, la lettura dei
-kilowatt/ora è associata a una missione (dunque una data e un operatore) e a un
-intervento (e dunque a un impianto). Per fare ciò si aggiunge un possibile tipo
-a intervento: `"lettura"`.
+suggerirebbe la possibile aggiunta di un attributo `lettura_kilowatt_ora` (con
+possibile valore nullo) all'associazione "intervento". In questo modo, la
+lettura dei kilowatt/ora sarebbe associata a una missione (dunque una data e un
+operatore) e a un intervento (e dunque a un impianto).
 
-**Vincolo** l'attributo `lettura_kilowatt_ora` dell'associazione "intervento"
-può essere non nullo se e solo se l'intervento in questione è associato a un
-impianto di tipologia "quadro di controllo" e l'intervento è di tipo
-`"lettura"`.
+In questo modo però ci si troverebbe costretti ad aggiungere un nuovo tipo di
+intervento (`"lettura"`) e ad aprirsi alla possibilità di poter effettuare più
+interventi sullo stesso impianto in una data missione. Questo porterebbe a dover
+riformulare lo schema concettuale in modo da rendere "intervento" un'entità a sé
+stante, altrimenti si avrebbero più istanze di associazione tra due istanze (di
+"missione" e "impianto"), che è impossibile per definizione di associazione.
 
-![](images/entita-missione-associazione-intervento.png)
+Si è scelto dunque di rendere "lettura" un'associazione tra le entità "missione"
+e "quadro di controllo", in modo da poter mantenere informazioni sul valore
+della lettura (attributo `kilowatt_ora` dell'associazione "lettura") ma anche
+sulla missione in cui è stata effettuata la lettura -- e di conseguenza la data
+della lettura -- e l'operatore che ha effettuato la lettura.
+
+![](images/associazione-lettura.png)
 
 #### Associazione tra "missione" e "operatore"
 

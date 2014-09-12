@@ -16,3 +16,4 @@
 <<[sections/schema-concettuale/entita-e-associazioni.md]
 <<[sections/schema-concettuale/ristrutturazione-frasi.md]
 <<[sections/schema-concettuale/diagramma-er.md]
+<<[sections/schema-concettuale/documentazione-entita-e-associazioni.md]
