@@ -216,3 +216,33 @@ che illuminano attraversamenti pedonali e che hanno necessità di interventi di
 manutenzione.
 
 Mediamente su ogni impianto vengono effettuati 4 interventi di ispezione.
+
+#### Operazioni
+
+1. Fornire le istruzioni per la creazione del DB e degli oggetti che lo
+costituiscono.
+2. Per ogni relazione individuata, fornire le istruzioni di inserimento,
+modifica ed eliminazione delle istanze.
+3. In fase di creazione di una nuova missione, a partire da una posizione data,
+si **devono** individuare gli impianti più vicini fino a un massimo di 50
+impianti su cui non siano stati effettuati altri interventi nell'ambito di
+missioni recenti (ossia occorse nell'ultimo mese).
+4. Per ogni quadro di controllo che dovrà essere censito in una data missione,
+si **dovrà** produrre la lista di tutti gli impianti a esso connessi.
+5. All'approssimarsi della scadenza mensile (fine del mese), si **deve**
+produrre la lista di tutti i quadri di controllo per i quali è ancora necessario
+effettuare la lettura del consumo, ovvero per i quali non è ancora disponibile
+una lettura effettuata nel mese in corso
+6. Al termine di una missione, di **deve** produrre la lista di tutti gli
+impianti censiti (ovvero sui quali sono stati effettuati interventi di
+censimento). Da questa lista si **dovranno** poter raggruppare gli impianti che
+richiedono interventi di manutenzione, in base alla tipologia di intervento.
+7. Mensilmente si vuole calcolare il consumo registrato da ogni quadro di
+controllo (risultante dalla differenza tra la lettura più recente e quella che
+la precede).
+8. Per supportare l'installazione di nuovi impianti in una data zona, si
+**devono** individuare i quadri di controllo circostanti (i più vicini alla
+posizione del nuovo impianto) che abbiano un numero di uscite libere
+sufficienti.
+9. Ogni giorno si **deve** produrre la lista di tutti i lampioni che illuminano
+attraversamenti pedonali e che hanno necessità di interventi di manutenzione.

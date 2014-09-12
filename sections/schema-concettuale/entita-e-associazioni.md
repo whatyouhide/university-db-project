@@ -325,11 +325,13 @@ La frase
 suggerisce l'aggiunta di un attributo `lettura_kilowatt_ora` (con possibile valore
 nullo) all'associazione "intervento". In questo modo, la lettura dei
 kilowatt/ora è associata a una missione (dunque una data e un operatore) e a un
-intervento (e dunque a un impianto).
+intervento (e dunque a un impianto). Per fare ciò si aggiunge un possibile tipo
+a intervento: `"lettura"`.
 
 **Vincolo** l'attributo `lettura_kilowatt_ora` dell'associazione "intervento"
 può essere non nullo se e solo se l'intervento in questione è associato a un
-impianto di tipologia "quadro di controllo".
+impianto di tipologia "quadro di controllo" e l'intervento è di tipo
+`"lettura"`.
 
 ![](images/entita-missione-associazione-intervento.png)
 

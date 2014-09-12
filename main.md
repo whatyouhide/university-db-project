@@ -13,7 +13,7 @@
 
 ## Schema concettuale
 
-<<[sections/schema-concettuale/entita.md]
+<<[sections/schema-concettuale/entita-e-associazioni.md]
 
 ## Ristrutturazione specifiche
 
