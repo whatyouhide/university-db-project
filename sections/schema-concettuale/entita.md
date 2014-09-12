@@ -16,7 +16,7 @@ suggeriscono la creazione di un'entità impianto con i seguenti attributi:
 - `codice` (che identifica un impianto)
 - `latitudine`
 - `longitudine`
-- `altezza`
+- `altezza` (intero, in centimetri)
 - `indirizzo`
     * `via`
     * `numero_civico_di_riferimento`
@@ -35,10 +35,9 @@ si trova un impianto.
 Nonostante la frase
 
 > I sostegni possono essere di diverso tipo (sostegni aerei, staffe a muro o
-> pali a terra), di diverso materiale e si vuole conoscere a quale altezza è
-> montato l'impianto. Inoltre [del sostegno] se ne deve conoscere lo stato di
-> conservazione e una descrizione dell'eventuale intervento di manutenzione
-> richiesto.
+> pali a terra), di diverso materiale [...]. Inoltre [del sostegno] se ne deve
+> conoscere lo stato di conservazione e una descrizione dell'eventuale
+> intervento di manutenzione richiesto.
 
 possa suggerire la creazione di un'entità "sostegno", essa non avrebbe poi
 associazioni con altre entità (se non con "impianto") e sarebbe identificata
@@ -287,20 +286,6 @@ Una missione è costituita da più interventi (attività), ognuno dei quali è
 dedicato a un impianto. Si è scelto di rappresentare il concetto di "intervento"
 come un'associazione molti a molti tra "impianto" e "missione".
 
-**Raffinamento specifica** l'operazione 6:
-
-> Al termine di una missione, si vuole produrre la lista di tutti gli impianti
-> censiti, raggruppando quelli che richiedono interventi di manutenzione, in
-> base alla tipologia di intervento (e.g. quelli che richiedono la sostituzione
-> di lampade, quindi quelli che richiedono interventi sulle linee di
-> alimentazione, ecc.).
-
-(in particolare "impianti censiti") suggerisce che il "censimento" non sia in
-realtà un tipo di intervento, bensì sia l'intervento stesso: un intervento (di
-qualsiasi tipo) è implicitamente un'attività di censimento di uno specifico
-impianto, dunque "censimento" non viene identificato come tipo di intervento e
-viene depennato dalla specifica.
-
 L'associazione "intervento" avrà gli attributi:
 
 - `tipo`: il tipo di intervento (manutenzione o installazione);
@@ -322,6 +307,7 @@ suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
 
 **Vincolo** riassumendo, le possibili tipologie di intervento sono:
 
+- `"censimento"`
 - `"installazione"`
 - `"manutenzione"`
 - `"ispezione"`
@@ -341,9 +327,9 @@ nullo) all'associazione "intervento". In questo modo, la lettura dei
 kilowatt/ora è associata a una missione (dunque una data e un operatore) e a un
 intervento (e dunque a un impianto).
 
-**Vincolo** l'attributo `lettura_kilowatt_ora` dell'associazione "intervento" può essere
-non nullo se e solo se l'intervento in questione è associato a un impianto di
-tipologia "quadro di controllo".
+**Vincolo** l'attributo `lettura_kilowatt_ora` dell'associazione "intervento"
+può essere non nullo se e solo se l'intervento in questione è associato a un
+impianto di tipologia "quadro di controllo".
 
 ![](images/entita-missione-associazione-intervento.png)
 
@@ -362,5 +348,9 @@ dalla frase:
 basandosi soltanto sull'attributo `data` della missione; per ottenere lo storico
 delle missioni di un operatore basta invece cercare tutte le missioni di
 quell'operatore con `data` precedente a quella del giorno corrente.
+
+**Vincolo** utilizzando la coppia `data` + associazione "assegnamento" come
+chiave primaria per l'entità "missione", ci assicuriamo che a ogni operatore
+possa essere assegnata una sola missione per un dato giorno.
 
 ![](images/associazione-assegnamento.png)

@@ -14,3 +14,7 @@
 ## Schema concettuale
 
 <<[sections/schema-concettuale/entita.md]
+
+## Ristrutturazione specifiche
+
+<<[sections/ristrutturazione-specifiche/frasi.md]

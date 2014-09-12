@@ -23,8 +23,8 @@ elettrica di alimentazione e le caratteristiche delle sorgenti di illuminazione.
 Bisogna anche conoscere quali sono gli impianti connessi e controllati da
 ciascun quadro di controllo.
 
-Si consideri che ogni quadro mediamente 20 impianti di illuminazione mentre ogni
-centralina semaforica controlla mediamente 4 semafori.
+Si consideri che ogni quadro controlla mediamente 20 impianti di illuminazione
+mentre ogni centralina semaforica controlla mediamente 4 semafori.
 
 Mediamente ogni impianto viene ispezionato 4 volte all'anno.
 
@@ -41,9 +41,7 @@ connessi.
 gli impianti censiti, raggruppando quelli che richiedono interventi di
 manutenzione, in base alla tipologia di intervento (e.g. quelli che richiedono
 la sostituzione di lampade, quindi quelli che richiedono interventi sulle linee
-di alimentazione, ecc.) 7. Mensilmente si vuole calcolare il consumo registrato
-da ogni contatore (data evidentemente dalla differenza tra l'ultima lettura e
-quella precedente).
+di alimentazione, ecc.)
 
 *Operazione 8*: per supportare l'installazione di nuovi impianti in una data
 zona, si devono individuare i quadri di controllo circostanti che abbiano un
@@ -52,10 +50,9 @@ numero di uscite libere sufficienti.
 ##### Frasi relative a "sostegno"
 
 I sostegni possono essere di diverso tipo (sostegni aerei, staffe a muro o pali
-a terra), di diverso materiale e si vuole conoscere a quale altezza è montato
-l'impianto. Inoltre [del sostegno] se ne deve conoscere lo stato di
-conservazione e una descrizione dell'eventuale intervento di manutenzione
-richiesto.
+a terra), di diverso materiale [...]. Inoltre [del sostegno] se ne deve
+conoscere lo stato di conservazione e una descrizione dell'eventuale intervento
+di manutenzione richiesto.
 
 Ogni impianto [...] è caratterizzato da [...] informazioni sul sostegno sul
 quale l'impianto stesso è montato.
@@ -66,8 +63,8 @@ I quadri di controllo sono caratterizzati [...] dalle informazioni di sostegno.
 
 Per le caratteristiche di alimentazione bisogna registrare il tipo di
 alimentazione (i.e. pannello solare, linea bifase o trifase), se è presente in
-pozzetto di derivazione e [...] lo stato di conservazione e
-l'eventuale manutenzione richiesta.
+pozzetto di derivazione e [...] lo stato di conservazione e l'eventuale
+manutenzione richiesta.
 
 Ogni impianto [...] è caratterizzato da [...] caratteristiche della linea
 elettrica di alimentazione.
@@ -205,9 +202,6 @@ di alimentazione, ecc.)
 
 ##### Frasi relative a "intervento"
 
-I quadri di controllo sono caratterizzati [...] dai dati relativi [...] alle
-necessarie manutenzioni [interventi].
-
 Si vuole mantenere uno storico delle missioni [...] registrando [...] il tipo di
 intervento ed una sua descrizione.
 
@@ -237,9 +231,3 @@ lettura e l'operatore che l’ha effettuata.
 lista di tutti i quadri di controllo per i quali è ancora necessario effettuare
 la lettura del contatore ovvero per i quali non è ancora disponibile una lettura
 aggiornata nel mese in corso.
-
-*Operazione 6*: al termine di una missione, si vuole produrre la lista di tutti gli impianti
-censiti, raggruppando quelli che richiedono interventi di manutenzione, in base
-alla tipologia di intervento (e.g. quelli che richiedono la sostituzione di
-lampade, quindi quelli che richiedono interventi sulle linee di alimentazione,
-ecc.).
