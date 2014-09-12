@@ -18,7 +18,7 @@ gestire per ogni tipologia.
 - quadri di controllo (11.000)
 - attraversamenti pedonali (20.000)
 
-Ogni impianto **deve essere** identificato da una codice univoco e **deve**
+Ogni impianto **deve** essere identificato da una codice univoco e **deve**
 essere caratterizzato da:
 
 - dati di localizzazione (latitudine e longitudine),
@@ -74,7 +74,7 @@ quale l'impianto stesso è montato.
 
 ##### Frasi relative a "linea elettrica di alimentazione"
 
-Ogni impianto **deve** essere caratterizzato da caratteristiche della linea
+Ogni impianto **deve** essere aver associate caratteristiche della linea
 elettrica di alimentazione.
 
 Per le caratteristiche della linea elettrica di alimentazione, si **deve**

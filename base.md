@@ -1,6 +1,4 @@
-# Testo originale
-
-## Requisiti
+#### Requisiti
 
 Si vuole realizzare una applicazione per un'azienda che gestisce impianti di
 illuminazione pubblica.
@@ -59,7 +57,7 @@ registrati dai contatori associati a ciascun quadro di controllo. Per ogni
 lettura si registrano i kilowatt/ora indicati dal contatore, la data della
 lettura e l'operatore che l'ha effettuata.
 
-## Operazioni
+#### Operazioni
 
 Le operazioni sulla base di dati, oltre a quelle eventualmente ed implicitamente
 definite nel testo precedente, sono:

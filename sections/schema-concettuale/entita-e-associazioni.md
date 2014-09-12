@@ -27,10 +27,10 @@ suggeriscono la creazione di un'entità impianto con i seguenti attributi:
 
 **Raffinamento specifica** in Italia ogni provincia è identificata da una sigla
 di due lettere *univoca*. Siccome una provincia può trovarsi in una sola
-regione, l'attributo `regione` dell'attributo composto `indirizzo` è depennato
-in quanto informazione ridondante. La scelta è giustificata anche dall'assenza
-di operazioni o altre sezioni dei requisiti che menzionano la "regione" in cui
-si trova un impianto.
+regione, l'attributo "regione" dell'attributo composto `indirizzo` descritto
+nella frase citata è stato depennato in quanto informazione ridondante. La
+scelta è giustificata anche dall'assenza di operazioni o altre sezioni dei
+requisiti che menzionano la "regione" in cui si trova un impianto.
 
 ##### Sostegno
 
@@ -85,9 +85,9 @@ suggerisce la creazione di un altro attributo composto di impianto, ovvero
 
 **Vincolo** il valore di `tipo_alimentazione` deve essere uno dei seguenti:
 
-- `"pannello_solare"`
-- `"linea_bifase"`
-- `"linea_trifase"`
+- `"pannello solare"`
+- `"linea bifase"`
+- `"linea trifase"`
 
 ##### Sorgente di illuminazione
 
@@ -133,7 +133,7 @@ valore nullo.
 ![](images/entita-impianto.png)
 
 #### Gerarchia con radice "impianto"
-
+o
 La frase:
 
 > Il sistema deve raccogliere informazioni relative alla posizione e allo stato
@@ -260,7 +260,7 @@ modo da dettagliare il concetto piuttosto vago di "informazioni anagrafiche".
 - `nome`
 - `cognome`
 - `data_di_nascita`
-- `telefono` (`[1...N]`)
+- `telefono` (`1...N`)
 - `email`
 - `indirizzo_di_residenza`
     * `via`
@@ -279,7 +279,7 @@ La frase
 > <strike>censimento</strike> [vedi *raffinamento specifica*] o manutenzione di
 > uno o più impianti.
 
-suggerisce la creazione di un'entità missione.
+suggerisce la creazione di un'entità "missione".
 
 Gli attributi di una missione consistono nel solo attributo `data`, ossia la
 data in cui viene svolta la missione.
@@ -291,15 +291,15 @@ come un'associazione molti a molti tra "impianto" e "missione".
 L'associazione "intervento" avrà gli attributi:
 
 - `tipo`: il tipo di intervento (manutenzione o installazione);
-- `tipologia_manutenzione`: l'operazione 6 (citata su) richiede che gli
-    interventi *di manutenzione* vengano raggruppati tramite tipologia.
+- `tipologia_manutenzione`: l'*operazione 6* richiede che gli interventi di
+    manutenzione vengano raggruppati tramite tipologia.
 - `descrizione`: una descrizione dell'intervento effettuato da parte
     dell'operatore. Questo attributo assumerà il valore nullo finché
     l'intervento non verrà effettivamente svolto da un operatore.
 
 **Vincolo** a causa dell'attributo `tipologia_manutenzione`, si introduce un
 vincolo che richiede che `tipologia_manutenzione` sia nullo per un intervento
-quando l'attributo `tipo` dello stesso intervento è diverso da "manutenzione".
+quando l'attributo `tipo` dello stesso intervento è diverso da `"manutenzione"`.
 
 La frase
 
@@ -362,7 +362,7 @@ basandosi soltanto sull'attributo `data` della missione; per ottenere lo storico
 delle missioni di un operatore basta invece cercare tutte le missioni di
 quell'operatore con `data` precedente a quella del giorno corrente.
 
-**Vincolo** utilizzando la coppia `data` + associazione "assegnamento" come
+Utilizzando la coppia { `data`, associazione "assegnamento" } come
 chiave primaria per l'entità "missione", ci assicuriamo che a ogni operatore
 possa essere assegnata una sola missione per un dato giorno.
 

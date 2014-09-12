@@ -157,8 +157,8 @@ illuminano attraversamenti pedonali e che hanno necessità di interventi di
 manutenzione.
 
 *Nota*: in realtà, siccome tra i possibili tipi di impianti elencati l'unico in
-grado di illuminare un attraversamento pedonale è un "lampione", riformuleremo
-la frase nel modo seguente:
+grado di illuminare un attraversamento pedonale è un "lampione" (come si può
+leggere anche nell'*operazione 9*), riformuleremo la frase nel modo seguente:
 > Per ogni attraversamento pedonale si vuole sapere quale è il lampione
 dedicato alla sua illuminazione.
 
@@ -170,10 +170,10 @@ sufficiente ad illuminare un attraversamento pedonale.
 L'azienda dispone di 40 operatori, identificati da una matricola e dalle
 relative informazioni anagrafiche [...].
 
-Infine si vogliono registrare le letture effettuate con periodicità mensile
+[...] si vogliono registrare le letture effettuate con periodicità mensile
 nell'ambito delle missioni assegnate a un operatore [...].
 
-Per ogni lettura si registrano [...] e l'operatore che l'ha effettuata.
+Per ogni lettura si registra [...] l'operatore che l'ha effettuata.
 
 ##### Frasi relative a "missione"
 
