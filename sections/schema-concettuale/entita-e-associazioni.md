@@ -52,11 +52,13 @@ composto con i suoi sotto-attributi:
     * `materiale`
     * `stato_di_conservazione`
     * `descrizione_intervento_richiesto`
+    * `tipologia_intervento_richiesto`
 
-*Nota*: `descrizione_intervento_richiesto` potrà assumere il valore nullo, ad
-indicare che non è richiesto alcun intervento. La presenza di una descrizione
-segnalerà dunque che è richiesto un intervento per il sostegno. Questo varrà
-anche per le situazioni analoghe incontrate successivamente.
+*Nota*: `descrizione_intervento_richiesto` e `tipologia_intervento_richiesto`
+potranno assumere il valore nullo, ad indicare che non è richiesto alcun
+intervento. La presenza di una descrizione e un tipo segnalerà dunque che è
+richiesto un intervento per il sostegno. Questo varrà anche per le situazioni
+analoghe incontrate successivamente.
 
 **Vincolo** il valore di `tipo` dell'attributo composto `sostegno` deve essere
 uno dei seguenti:
@@ -82,6 +84,7 @@ suggerisce la creazione di un altro attributo composto di impianto, ovvero
     * `in_pozzetto_di_derivazione`
     * `stato_di_conservazione`
     * `descrizione_intervento_richiesto` [vedi *nota* in *Sostegno*]
+    * `tipologia_intervento_richiesto`
 
 **Vincolo** il valore di `tipo_alimentazione` deve essere uno dei seguenti:
 
@@ -291,15 +294,9 @@ come un'associazione molti a molti tra "impianto" e "missione".
 L'associazione "intervento" avrà gli attributi:
 
 - `tipo`: il tipo di intervento (manutenzione o installazione);
-- `tipologia_manutenzione`: l'*operazione 6* richiede che gli interventi di
-    manutenzione vengano raggruppati tramite tipologia.
 - `descrizione`: una descrizione dell'intervento effettuato da parte
     dell'operatore. Questo attributo assumerà il valore nullo finché
     l'intervento non verrà effettivamente svolto da un operatore.
-
-**Vincolo** a causa dell'attributo `tipologia_manutenzione`, si introduce un
-vincolo che richiede che `tipologia_manutenzione` sia nullo per un intervento
-quando l'attributo `tipo` dello stesso intervento è diverso da `"manutenzione"`.
 
 La frase
 

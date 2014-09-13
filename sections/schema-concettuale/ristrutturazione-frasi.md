@@ -234,9 +234,14 @@ produrre la lista di tutti i quadri di controllo per i quali è ancora necessari
 effettuare la lettura del consumo, ovvero per i quali non è ancora disponibile
 una lettura effettuata nel mese in corso
 6. Al termine di una missione, di **deve** produrre la lista di tutti gli
-impianti censiti (ovvero sui quali sono stati effettuati interventi di
-censimento). Da questa lista si **dovranno** poter raggruppare gli impianti che
-richiedono interventi di manutenzione, in base alla tipologia di intervento.
+impianti censiti o ispezionati (ovvero sui quali sono stati effettuati
+interventi di censimento o di ispezione). Da questa lista si **dovranno** poter
+raggruppare gli impianti che richiedono interventi di manutenzione, in base alla
+tipologia di intervento.  
+**Raffinamento specifica** si è aggiunto anche il tipo `"ispezione"` ai tipi di
+interventi citati nell'operazione 6. Questa scelta è derivata come conseguenza
+naturale del fatto che gli interventi di ispezione hanno proprio lo scopo di
+scoprire eventuali interventi di manutenzione necessari per un dato impianto.
 7. Mensilmente si vuole calcolare il consumo registrato da ogni quadro di
 controllo (risultante dalla differenza tra la lettura più recente e quella che
 la precede).

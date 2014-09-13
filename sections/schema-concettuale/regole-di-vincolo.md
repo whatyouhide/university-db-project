@@ -43,8 +43,3 @@ relazione "controllo", ma solo in qualità di altro estremo della relazione
 - `"installazione"`
 - `"manutenzione"`
 - `"ispezione"`
-
-##### RV6
-
-`intervento.tipologia_manutenzione` deve avere valore nullo se, per la stessa
-istanza della relazione, `intervento.tipo` è diverso da `"manutenzione"`.
