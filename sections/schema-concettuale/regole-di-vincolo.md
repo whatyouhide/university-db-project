@@ -26,8 +26,8 @@ dei seguenti valori:
 
 ##### RV3
 
-`impianto.sorgente_di_illuminazione` deve essere nullo quando `impianto` è un
-"quadro di controllo".
+Un impianto non deve avere attributi `sorgente_di_illuminazione` se è ti
+tipologia "quadro di controllo".
 
 ##### RV4
 
