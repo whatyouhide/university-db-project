@@ -33,3 +33,8 @@
 <<[sections/progettazione-logica/analisi-volumi.md]
 <<[sections/progettazione-logica/tavola-operazioni.md]
 <<[sections/progettazione-logica/ristrutturazione-schema-er.md]
+
+<!-- BREAK -->
+## Implementazione
+
+<<[sections/implementazione/traduzione-verso-modello-relazionale.md]

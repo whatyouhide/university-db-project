@@ -74,8 +74,10 @@ dell'entità "impianto", ossia l'attributo `codice_lampione`. Esso si individua
 univocamente il lampione che illumina un dato attraversamento pedonale, ed è
 nullo quando `impianto.tipo` è diverso da `"attraversamento pedonale"`.
 
-Si introduce inoltre un **vincolo** che impone che `codice_lampione` per un dato
-impianto sia nullo se quell'impianto non è un `attraversamento pedonale`.
+Si introduce dunque il **vincolo** che impone che `codice_lampione` per un dato
+impianto sia nullo se quell'impianto non è un `attraversamento pedonale`, e il
+**vincolo** che impone che `codice_lampione` si riferisca sempre a un impianto
+di `tipo` `"lampione"`.
 
 La porzione di schema modificata risulta come segue. Vengono indicati solo gli
 attributi `impianto.tipo` e `impianto.codice_lampione` in quanto tutti gli altri
