@@ -39,10 +39,10 @@ individuato come `impianto.sost_tipo`.
 - **sorgente_di_illuminazione** (<u>id</u>, da_sostituire, tipo_lampada,
     stato_di_conservazione, *codice_impianto*)
 - **quadro_di_controllo** (<u>*codice_impianto*</u>, numero_uscite,
-    stato_di_funzionamento, descrizione_intervento_richiesto)
-- **missione** (<u>*matricola_operatore*</u>, <u>data</u>)
+    stato_di_funzionamento)
 - **operatore** (<u>matricola</u>, nome, cognome, email, ind_via,
     ind_numero_civico, ind_comune, ind_cap)
+- **missione** (<u>*matricola_operatore*</u>, <u>data</u>)
 - **telefono** (<u>*matricola_operatore*</u>, <u>numero</u>)
 - **intervento** (<u>*codice_impianto*</u>, <u>*matricola_operatore*</u>,
     <u>*data*</u>, tipo, descrizione)

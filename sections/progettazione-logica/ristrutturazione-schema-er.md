@@ -21,6 +21,10 @@ di intervento richiesto può essere specificato in modo più generale.
 In questo modo diventa facile selezionare gli impianti che richiedono
 manutenzioni e raggrupparli in base al tipo di manutenzione.
 
+L'attributo `descrizione_intervento_richiesto` viene eliminato anche dall'entità
+(specializzazione) "quadro" in quanto l'informazione è già contenuta nell'entità
+di cui essa è figlia.
+
 Per convenzione, assumeremo che un impianto *ha bisogno di un intervento di
 manutenzione* quando l'attributo `impianto.tipo_intervento_richiesto` non ha il
 valore nullo.
@@ -62,12 +66,36 @@ al relativo "impianto" con l'associazione "generalizzazione".
 La scelta è stata guidata dal fatto che tutte le altre specializzazioni di
 "impianto" sono triviali e non contengono attributi aggiuntivi.
 
+##### Ridondanza
+
+Si è introdotta una ridondanza in modo da semplificare molti *check* di vincoli:
+ogni quadro di controllo avrà come attributo `impianto.tipo` (dell'impianto
+generalizzazione del quadro di controllo in questione) il valore `"quadro di
+controllo"`.  
+La ridondanza è presente in quanto sarebbe possibile inferire che un impianto è
+un quadro di controllo semplicemente cercando un quadro di controllo che abbia
+il `codice` corrispondente a quello dell'impianto stesso; siccome nel check dei
+vincoli il DBMS scelto non consente di eseguire query annidate, l'assenza di
+questa ridondanza porterebbe alla necessità di creare funzioni di check che
+vengano triggerate quando c'è bisogno di eseguire questi controlli.
+
 Si introduce il **vincolo** su `impianto.tipo`, che può assumere solo i valori:
 
 - `"semaforo"`
+- `"quadro di controllo"`
 - `"segnale stradale"`
 - `"lampione"`
 - `"attraversamento pedonale"`
+
+A seguito della ridondanza introdotta ed essendo la generalizzazione *completa*,
+si aggiunge anche il *vincolo* che impone che `impianto.tipo` non sia nullo.
+
+*Nota*: l'introduzione della ridondanza porta intuitivamente un ulteriore
+**vincolo**, ossia che `impianto.tipo` può assumere il valore `"quadro di
+controllo"` se e solo se quell'impianto è referenziato da un quadro di
+controllo. Questo check va eseguito con una funzione triggerata come descritto
+sopra, ma l'utilizzo di questo tipo di funzioni si limita (in questo modo) solo
+a questo check.
 
 L'unica associazione è "illumina": essa viene tradotta in un ulteriore attributo
 dell'entità "impianto", ossia l'attributo `codice_lampione`. Esso si individua
