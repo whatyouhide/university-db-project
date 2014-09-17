@@ -1,41 +1,29 @@
 -- Impianti.
 
 -- Inserimento.
-INSERT INTO impianto VALUES (
-  -- codice, tipo
-  'qdc1', 'quadro di controllo',
-  -- controllato da
-  NULL,
-  -- codice lampione
-  NULL,
-  -- lon_lat, altezza
-  point '(33.132523, 11.142633)', 485,
-  -- intervento
-  NULL, NULL,
-  -- sostegno
-  'immerso in pozzetto', 'ottimo',
-  -- linea elettrica di alimentazione
-  'linea trifase', 'buono', false,
-  -- indirizzo
-  'corso vittorio emanuele', '1110', 'Milano', 'MI'
-);
+
+-- TODO commentare questa cosa che bisogna inserire prima il quadro di controllo
+-- e poi l'impianto associato (deferred + check function che non può essere
+-- deferred), percio la transaction.
+BEGIN TRANSACTION;
 INSERT INTO quadro_di_controllo VALUES ('qdc1', 10, 'ottimo');
+INSERT INTO impianto VALUES (
+  'qdc1', 'quadro di controllo', NULL, NULL, -- codice, tipo, controllato_da, lampione
+  '(33.132523, 11.142633)', 485, -- lon_lat, altezza
+  NULL, NULL, -- intervento
+  'immerso in pozzetto', 'ottimo', -- sostegno
+  'linea trifase', 'buono', false, -- linea el. di alimentazione
+  'corso vittorio emanuele', '1110', 'Milano', 'MI' --indirizzo
+);
+COMMIT;
 
 INSERT INTO impianto VALUES (
-  -- codice, tipo
-  'lamp1', 'lampione',
-  -- quadro di controllo, lampione
-  'qdc1', NULL,
-  -- lon_lat, altezza
-  point '(43.211234, 12.421341)', 100,
-  -- intervento
-  'Si è danneggiato il sostegno a causa del maltempo', 'manutenzione',
-  -- sostegno
-  'palo a terra', 'danneggiato',
-  -- linea elettrica di alimentazione
-  'linea bifase', 'buono', false,
-  -- indirizzo
-  'via carducci', '33bis', 'L''aquila', 'AQ'
+  'lamp1', 'lampione', 'qdc1', NULL, -- codice, tipo, quadro, lampione
+  '(43.211234, 12.421341)', 100, -- lon_lat, altezza
+  'Si è danneggiato il sostegno a causa del maltempo', 'manutenzione', -- intervento
+  'palo a terra', 'danneggiato', -- sostegno
+  'linea bifase', 'buono', false, -- linea el. di alimentazione
+  'via carducci', '33bis', 'L''aquila', 'AQ' -- indirizzo
 );
 
 INSERT INTO sorgente_di_illuminazione(
@@ -43,22 +31,12 @@ INSERT INTO sorgente_di_illuminazione(
 ) VALUES (false, 'alogena', 'buono', 'lamp1');
 
 INSERT INTO impianto VALUES (
-  -- codice, tipo
-  'attrped1', 'attraversamento pedonale',
-  -- controllato da
-  'qdc1',
-  -- codice lampione
-  'lamp1',
-  -- lon_lat, altezza
-  point '(43.211238, 12.421228)', 0,
-  -- intervento
-  NULL, NULL,
-  -- sostegno
-  'staffa a muro', 'ottimo',
-  -- linea di alimentazione
-  'pannello solare', 'buono', false,
-  -- indirizzo
-  'via rossi', '1', 'Miglianico', 'CH'
+  'attrped1', 'attraversamento pedonale', 'qdc1', 'lamp1', -- codice, tipo, controllato_da, lamp.
+  '(43.211238, 12.421228)', 0, -- lon_lat, altezza
+  NULL, NULL, -- intervento
+  'staffa a muro', 'ottimo', -- sostegno
+  'pannello solare', 'buono', false, -- linea el. di alimentazione
+  'via rossi', '1', 'Miglianico', 'CH' -- indirizzo
 );
 
 UPDATE impianto

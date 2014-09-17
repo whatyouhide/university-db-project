@@ -33,6 +33,7 @@
 <<[sections/progettazione-logica/analisi-volumi.md]
 <<[sections/progettazione-logica/tavola-operazioni.md]
 <<[sections/progettazione-logica/ristrutturazione-schema-er.md]
+<<[sections/progettazione-logica/regole-di-vincolo-finali.md]
 
 <!-- BREAK -->
 ## Implementazione

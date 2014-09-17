@@ -1,29 +1,37 @@
 -- Creazione di domini custom in modo da facilitare la definizione delle colonne
 -- e da poter riutilizzare codice.
 
+-- Il codice di un impianto.
 CREATE DOMAIN CodiceImpianto varchar(20);
+
+-- La matricola di un operatore.
 CREATE DOMAIN MatricolaOperatore varchar(20);
-CREATE DOMAIN NumeroCivico varchar(15);
 
-CREATE DOMAIN NumeroDiTelefono varchar(10) CHECK (VALUE LIKE '3%');
+-- Numero di telefono.
+CREATE DOMAIN NumeroDiTelefono varchar(10);
 
+-- RVF1, RVF2
 CREATE DOMAIN TipoImpianto varchar(24) NOT NULL CHECK (VALUE IN
   ('semaforo', 'segnale stradale', 'lampione',
   'attraversamento pedonale', 'quadro di controllo')
 );
 
+-- RVF10
 CREATE DOMAIN TipoIntervento varchar(16) CHECK (VALUE IN
   ('censimento', 'installazione', 'manutenzione', 'ispezione')
 );
 
+-- RVF5
 CREATE DOMAIN TipoSostegno varchar(19) CHECK (VALUE IN
   ('sostegno aereo', 'staffa a muro', 'palo a terra', 'immerso in pozzetto')
 );
 
+-- RVF7
 CREATE DOMAIN TipoLineaElettricaDiAlimentazione varchar(15) CHECK (VALUE IN
   ('pannello solare', 'linea bifase', 'linea trifase')
 );
 
+-- RVF11
 CREATE DOMAIN Provincia varchar(2) CHECK (VALUE IN (
     'AG', 'AL', 'AN', 'AO', 'AQ', 'AR', 'AP', 'AT', 'AV', 'BA', 'BT', 'BL',
     'BN', 'BG', 'BI', 'BO', 'BZ', 'BS', 'BR', 'CA', 'CL', 'CB', 'CI', 'CE',

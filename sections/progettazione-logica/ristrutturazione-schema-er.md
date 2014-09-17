@@ -88,7 +88,7 @@ Si introduce il **vincolo** su `impianto.tipo`, che può assumere solo i valori:
 - `"attraversamento pedonale"`
 
 A seguito della ridondanza introdotta ed essendo la generalizzazione *completa*,
-si aggiunge anche il *vincolo* che impone che `impianto.tipo` non sia nullo.
+si aggiunge anche il **vincolo** che impone che `impianto.tipo` non sia nullo.
 
 *Nota*: l'introduzione della ridondanza porta intuitivamente un ulteriore
 **vincolo**, ossia che `impianto.tipo` può assumere il valore `"quadro di
