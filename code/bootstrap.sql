@@ -1,5 +1,5 @@
--- Distruzione del database (se esiste) in modo da partire con una lavagna
--- bianca.
+-- Distruzione del database (se esiste) in modo da partire con una "tavola
+-- bianca".
 DROP DATABASE IF EXISTS illuminazione_pubblica;
 
 -- Creazione del database.

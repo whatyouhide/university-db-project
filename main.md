@@ -39,3 +39,4 @@
 ## Implementazione
 
 <<[sections/implementazione/traduzione-verso-modello-relazionale.md]
+<<[sections/implementazione/listing-codice.md]

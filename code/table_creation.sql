@@ -1,6 +1,3 @@
--- Creazione delle tabelle
--- =======================
-
 -- Impianto.
 CREATE TABLE impianto(
   codice CodiceImpianto PRIMARY KEY,
