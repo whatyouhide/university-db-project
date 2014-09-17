@@ -60,7 +60,7 @@ INSERT INTO telefono(matricola_operatore, numero) VALUES
 -- Associamo delle missioni agli operatori creati.
 INSERT INTO missione(matricola_operatore, data) VALUES
   ('12', '2014-11-01'), ('12', '2014-09-26'), ('94', '2014-12-25'),
-  ('94', '2014-09-26'), ('94', '2014-02-02');
+  ('94', '2014-09-26'), ('94', '2014-02-02'), ('12', '2014-09-10');
 -- Correggiamo la data alla missione del 2014-12-25
 UPDATE missione
 SET data = '2014-12-15'
@@ -74,6 +74,7 @@ INSERT INTO
   intervento(codice_impianto, matricola_operatore, data, tipo, descrizione)
 VALUES
   ('attrped1', '94', '2014-12-15', 'censimento', NULL),
+  ('attrped1', '12', '2014-09-10', 'ispezione', NULL),
   ('qdc1', '94', '2014-02-02', 'censimento', 'Censimento e lettura quadro'),
   ('lamp1', '94', '2014-09-26', 'manutenzione', 'Riparato danno al sostegno');
 
