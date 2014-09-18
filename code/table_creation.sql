@@ -19,8 +19,31 @@ CREATE TABLE impianto(
   ind_via varchar(200),
   ind_numero_civico_di_riferimento varchar(10),
   ind_comune varchar(100),
-  ind_provincia Provincia
+  ind_provincia Provincia,
+
+  -- RVF13
+  CONSTRAINT cnstr_tipo_e_descrizione CHECK (
+    (tipo_intervento_richiesto IS NULL AND descrizione_intervento_richiesto IS NULL)
+    OR
+    (tipo_intervento_richiesto IS NOT NULL AND descrizione_intervento_richiesto IS NOT NULL)
+  ),
+
+  -- RVF6
+  CONSTRAINT cnstr_sost_immerso_in_pozzetto CHECK (
+    sost_tipo <> 'immerso in pozzetto' OR tipo = 'quadro di controllo'
+  ),
+
+  -- RVF4
+  CONSTRAINT cnstr_codice_lampione CHECK (
+    codice_lampione IS NULL OR tipo = 'attraversamento pedonale'
+  ),
+
+  -- RVF9
+  CONSTRAINT cnstr_controllato_da CHECK (
+    controllato_da IS NOT NULL OR tipo = 'quadro di controllo'
+  )
 );
+
 
 -- Sorgenti di illuminazione.
 CREATE TABLE sorgente_di_illuminazione(
@@ -30,6 +53,7 @@ CREATE TABLE sorgente_di_illuminazione(
   stato_di_conservazione varchar(200),
   codice_impianto CodiceImpianto REFERENCES impianto(codice)
 );
+
 
 -- Quadri di controllo.
 --
@@ -59,49 +83,33 @@ CREATE TABLE quadro_di_controllo(
     REFERENCES impianto(codice) DEFERRABLE INITIALLY DEFERRED
 );
 
--- RVF8
--- TODO commentare
-ALTER TABLE sorgente_di_illuminazione
-ADD CONSTRAINT cnstr_no_qdc CHECK (NOT check_impianto_e_qdc(codice_impianto));
-
--- Aggiungiamo la foreign key della relazione quadro_di_controllo verso la
--- relazione `impianto`. Lo facciamo qui e non durante la creazione della
--- tabella `impianto` in quanto in quel momento la relazione
--- `quadro_di_controllo` ancora non era stata creata.
-ALTER TABLE impianto
-  ADD FOREIGN KEY (controllato_da) REFERENCES quadro_di_controllo(codice_impianto);
-
--- RVF13
--- TODO commentare e riposizionare insieme agli altri
-ALTER TABLE impianto ADD CONSTRAINT cnstr_tipo_e_descrizione CHECK (
-  tipo_intervento_richiesto IS NULL AND descrizione_intervento_richiesto IS NULL
-  OR
-  tipo_intervento_richiesto IS NOT NULL AND descrizione_intervento_richiesto IS NOT NULL
-);
 
 -- RFV3
--- TODO commentare
+-- Controlliamo che un impianto abbia il tipo "quadro di controllo" se e solo se
+-- è effettivamente un quadro di controllo. Aggiungiamo questo constraint qui in
+-- modo da essere sicuri dell'esistenza della relazione `quadro_di_controllo`.
 ALTER TABLE impianto ADD CONSTRAINT check_impianto_e_qdc CHECK (
   tipo <> 'quadro di controllo' OR check_impianto_e_qdc(codice)
 );
 
--- RVF6
--- TODO commentare
-ALTER TABLE impianto ADD CONSTRAINT check_sost_tipo CHECK (
-  sost_tipo <> 'immerso in pozzetto' OR tipo = 'quadro di controllo'
+
+-- RVF8
+-- Controlliamo che una sorgente di illuminazione non possa essere associata a
+-- un quadro di controllo. Questo check si trova qui in modo da essere sicuri
+-- dell'esistenza della relazione `quadro_di_controllo`.
+ALTER TABLE sorgente_di_illuminazione ADD CONSTRAINT cnstr_no_qdc CHECK (
+  NOT check_impianto_e_qdc(codice_impianto)
 );
 
--- RVF4
--- TODO commentare
-ALTER TABLE impianto ADD CONSTRAINT codice_lampione_chk CHECK (
-  codice_lampione IS NULL OR tipo = 'attraversamento pedonale'
-);
 
--- RVF9
--- TODO commentare
-ALTER TABLE impianto ADD CONSTRAINT check_controllato_da CHECK (
-  controllato_da IS NOT NULL OR tipo = 'quadro di controllo'
-);
+-- Aggiungiamo la foreign key della relazione `quadro_di_controllo` verso la
+-- relazione `impianto`. Lo facciamo qui e non durante la creazione della
+-- tabella `impianto` in quanto in quel momento la relazione
+-- `quadro_di_controllo` ancora non era stata creata.
+ALTER TABLE impianto
+  ADD FOREIGN KEY (controllato_da)
+  REFERENCES quadro_di_controllo(codice_impianto);
+
 
 -- Operatori.
 CREATE TABLE operatore(
