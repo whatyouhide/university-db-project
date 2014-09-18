@@ -1,3 +1,13 @@
+-- Impostiamo due impostazioni della console di PostgreSQL: la prima impedisce
+-- l'utilizzo di un "pager" (come `less`) in modo da non dover interrompere
+-- l'esecuzione di script che stampano risultati, mentre la seconda impone alla
+-- console del db di interrompere l'esecuzione degli script al primo errore
+-- incontrato (utile per il testing, dove eseguiamo questo script e possiamo
+-- esaminare eventuali errori uno alla volta).
+\set ON_ERROR_STOP on
+\pset pager off
+
+-- Eseguiamo tutti gli altri script.
 \ir bootstrap.sql
 \ir domains.sql
 \ir functions.sql

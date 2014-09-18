@@ -8,6 +8,7 @@ CREATE TABLE impianto(
   codice_lampione CodiceImpianto REFERENCES impianto(codice),
   lon_lat point,
   altezza integer,
+  installato boolean,
   descrizione_intervento_richiesto text,
   tipo_intervento_richiesto varchar(200),
   sost_tipo TipoSostegno,
@@ -31,13 +32,31 @@ CREATE TABLE sorgente_di_illuminazione(
 );
 
 -- Quadri di controllo.
+--
+-- Si noti come l'inserimento di un quadro di controllo va eseguito in una
+-- *transaction* SQL. Il motivo di ciò è che un quadro di controllo ha un
+-- vincolo di chiave esterna verso un impianto ma l'impianto può essere un
+-- quadro di controllo solo se esiste un quadro di controllo nella relazione
+-- `quadro_di_controllo`. Per ovviare a questo problema si è utilizzato il
+-- costrutto DEFFERRED INITIALLY DEFERRED, che consente di rimandare il check
+-- del vincolo a quando la transazione sarà conclusa (con un COMMIT).
+--
+-- Nello specifico, va inserito *prima* un quadro di controllo e poi l'impianto
+-- associato (sempre nella stessa transazione) in quanto PostgreSQL support
+-- l'utilizzo di DEFERRABLE solo con vincoli di alcuni tipi, tra i quali
+-- REFERENCES. Vincoli imposti tramite chiamate a funzioni esterne (come la
+-- funzione già definita `check_impianto_e_qdc` che verrà utilizzata per
+-- aggiungere un constraint alle relazioni `sorgente_di_illuminazione` e
+-- `impianto`) non sono supportati. Seguendo l'ordine di inserimento descritto,
+-- questi vincoli verranno eseguiti alla fine della transazione, quando non ci
+-- saranno incongruenze.
 CREATE TABLE quadro_di_controllo(
   codice_impianto CodiceImpianto PRIMARY KEY,
-  numero_uscite integer,
+  numero_uscite smallint,
   stato_di_funzionamento varchar(200),
 
   FOREIGN KEY (codice_impianto)
-  REFERENCES impianto(codice) DEFERRABLE INITIALLY DEFERRED
+    REFERENCES impianto(codice) DEFERRABLE INITIALLY DEFERRED
 );
 
 -- RVF8

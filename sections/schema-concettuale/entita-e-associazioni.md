@@ -304,6 +304,11 @@ La frase
 
 suggerisce l'aggiunta di un nuovo tipo di intervento, ossia "ispezione".
 
+Poiché esiste la tipologia di intervento "installazione", si è deciso di
+aggiungere un attributo booleano `installato` all'entità "impianto" in modo da
+poter inserire impianti nella base di dati ancora prima che essi esistano, e
+marcarli come "ancora non installati".
+
 **Vincolo** riassumendo, le possibili tipologie di intervento sono:
 
 - `"censimento"`

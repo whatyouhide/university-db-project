@@ -5,12 +5,14 @@
 -- impianti su cui non siano stati effettuati altri interventi nell'ambito di
 -- missioni recenti (ossia occorse nell'ultimo mese).
 
+
 -- Per realizzare questa operazione si costruisce la funzione impianti_vicini().
 -- Questa funzione prende in input una posizione. La funzione deve essere
 -- invocata manualmente passando una coppia di coordinate in input, come
 -- nell'esempio seguente:
 --
 --     SELECT * FROM impianti_vicini('(32.324234, 12.023123)');
+
 
 -- Prima di tutto creiamo una view in cui filtriamo gli impianti che non hanno
 -- ricevuto interventinell'ultimo mese.
@@ -21,6 +23,10 @@ CREATE VIEW impianti_senza_interventi_nellultimo_mese AS
     WHERE data >= (CURRENT_DATE - interval '1 month')
     AND data <= CURRENT_DATE
   );
+
+\echo Test (view): impianti_senza_interventi_nellultimo_mese
+SELECT * FROM impianti_senza_interventi_nellultimo_mese;
+
 
 -- Creiamo una funzione al posto di una view in modo da poter parametrizzare la
 -- posizione di partenza (come richiesto dall'operazione 3).
@@ -33,6 +39,7 @@ RETURNS table (
   codice_lampione CodiceImpianto,
   lon_lat point,
   altezza integer,
+  installato boolean,
   descrizione_intervento_richiesto text,
   tipo_intervento_richiesto varchar(200),
   sost_tipo TipoSostegno,
@@ -58,3 +65,8 @@ LIMIT 50;
 
 -- Terminiamo la funzione e specifichiamo che il linguaggio utilizzato è SQL.
 $body$ language sql;
+
+
+-- Esempio di utilizzo e testing.
+\echo Test: impianti_vicini
+SELECT * FROM impianti_vicini('(33.32243, 15.53738)');

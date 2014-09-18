@@ -2,7 +2,9 @@
 
 | Entità                   | Descrizione                                          | Attributi                                                                                                          | Identificatore            |
 |--                        | -                                                    | -                                                                                                                  | -                         |
-| impianto                 | impianto di illuminazione                            | latitudine, longitudine, altezza, indirizzo, sostegno, sorgente_di_illuminazione, linea_elettrica_di_alimentazione | codice                    |
+| impianto                 | impianto di illuminazione
+| latitudine, longitudine, altezza, indirizzo, sostegno,
+sorgente_di_illuminazione, linea_elettrica_di_alimentazione, installato | codice                    |
 | segnale stradale         | segnale stradale luminoso                            |                                                                                                                    |                           |
 | semaforo                 | strumento per il controllo del traffico agli incroci |                                                                                                                    |                           |
 | attraversamento pedonale | punto riservato all'attraversamento dei pedoni       |                                                                                                                    |                           |

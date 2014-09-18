@@ -136,6 +136,48 @@ Gli attributi multivalore `operatore.telefono` e
     "generalizzazione" con un "quadro di controllo" (ovvero che i quadri di
     controllo non abbiano sorgenti di illuminazione, come esprimeva RV3).
 
+#### Ridondanze
+
+##### Quadro di controllo e uscite libere
+
+L'*operazione 8* richiede che si abbia a disposizione il numero di uscite libere
+relative a un quadro di controllo. Con lo schema corrente, l'unico modo di
+calcolare quante siano le uscite libere di un quadro di controllo consiste nel
+calcolare la differenza fra le uscite totali di quel quadro di controllo e le
+uscite occupate; per calcolare le uscite occupate bisogna contare tutte le
+istanze di impianto che siano controllate dal quadro di controllo in questione.
+
+Questo significa che ogni volta che vogliamo sapere il numero di uscite libere
+di un impianto dobbiamo effettuare un accesso in lettura con una query di tipo
+`COUNT()`. L'operazione non è onerosa e viene eseguita, supponendo che venga
+eseguita solo in relazione all'*operazione 8*, con frequenza piuttosto rada
+(mensilmente).
+
+L'alternativa consisterebbe nell'aggiungere un attributo (`uscite_libere`)
+all'entità quadro di controllo in modo da tener traccia delle uscite libere
+avendole a disposizione senza ulteriori accessi (una volta che si ha a
+disposizione un quadro di controllo). Supponendo di usare un intero a 2 byte per
+questo numero (in PostgreSQL si tratta di uno `smallint`), e avendo 20.000
+quadri di controllo nella base di dati, il volume aggiuntivo consisterebbe in
+40kb di dati.
+
+Oltre al volume aggiuntivo, un altro aspetto da tenere in considerazione è la
+necessità di mantenere aggiornato questo valore. Per farlo bisognerebbe creare
+un *trigger* (che scatti all'inserimento, modifica o rimozione di un impianto
+controllato da un quadro di controllo) che aggiorni il numero delle uscite
+libere.
+
+Dopo questa analisi si è deciso di non utilizzare l'attributo aggiuntivo
+`uscite_libere` in quanto la query da eseguire per ricavare questo valore
+dinamicamente è molto semplice e consiste in un solo accesso aggiuntivo in
+lettura, con frequenza molto bassa. Il codice SQL in questo modo viene mantenuto
+più contenuto (senza l'aggiunta di trigger) e più chiaro.
+
+Per facilitare l'accesso a questa informazione verrà creata una funzione scalare
+che, data una chiave primaria dell'entità "quadro di controllo", fornirà il
+numero di uscite libere di quell'impianto, "nascondendo" la query eseguita
+all'utente finale.
+
 #### Scelta degli identificatori principali
 
 Tutti gli identificatori principali sono stati espressi nel corso della

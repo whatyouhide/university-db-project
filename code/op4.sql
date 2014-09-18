@@ -24,6 +24,7 @@ RETURNS table (
   codice_lampione CodiceImpianto,
   lon_lat point,
   altezza integer,
+  installato boolean,
   descrizione_intervento_richiesto text,
   tipo_intervento_richiesto varchar(200),
   sost_tipo TipoSostegno,
