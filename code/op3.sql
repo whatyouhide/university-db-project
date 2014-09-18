@@ -51,7 +51,7 @@ RETURNS table (
 -- argomento (`$1`) e le posizione dei singoli impianti.
 -- Sfruttiamo la view create in precedenza per selezionare gli impianti soltanto
 -- tra quelli su cui non sono stati fatti interventi nell'ultimo mese.
-SELECT *, miles_to_km($1 <@> lon_lat) AS distanza
+SELECT *, distance_in_km($1, lon_lat) AS distanza
 FROM impianti_senza_interventi_nellultimo_mese
 ORDER BY distanza ASC
 LIMIT 50;

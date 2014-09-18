@@ -14,19 +14,6 @@ END;
 $body$ LANGUAGE plpgsql;
 
 
--- Trasforma il parametro `miles` (valore in miglia terrestri) nell'equivalente
--- valore in km.
--- Questa funzione è stata creata in quanto l'estensione `earthdistance` di
--- PostgreSQL (in particolare l'operatore di distanza che mette a disposizione,
--- ovvero `<@>`) ritorna un valore in miglia terrestri.
-CREATE OR REPLACE FUNCTION miles_to_km(miles float8)
-RETURNS float8 AS $body$
-BEGIN
-  RETURN ($1 * 1.60934);
-END;
-$body$ LANGUAGE plpgsql;
-
-
 -- Trova la distanza in km tra i due punti passati in input. Questa funzione è
 -- stata create in quanto l'operatore "distanza" (`<@>`) messo a disposizione
 -- dall'etensione `earthdistance` di PostgreSQL ritorna un valore in miglia
