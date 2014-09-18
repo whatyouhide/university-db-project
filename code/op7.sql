@@ -5,21 +5,6 @@
 -- che la precede).
 
 
--- TODO rivedere se va tutto bene
-CREATE OR REPLACE FUNCTION data_lettura_piu_recente_rispetto_a_data(c CodiceImpianto, d date)
-RETURNS date AS $body$
-BEGIN
-  return (
-    SELECT data
-    FROM lettura
-    WHERE codice_impianto = $1 AND data < $2
-    ORDER BY data
-    DESC LIMIT 1
-  );
-END;
-$body$ language plpgsql;
-
-
 -- Creiamo la vista `consumi`, che contiene il consumo registrato da ogni quadro
 -- di controllo, come descritto dalla specifica dell'operazione.
 --
@@ -30,6 +15,7 @@ $body$ language plpgsql;
 -- condizioni di join.
 -- La differenza delle letture (cioè il consumo) viene calcolato nella parte
 -- della SELECT.
+
 CREATE VIEW consumi AS SELECT DISTINCT qdc.codice_impianto,
     lett_piu_recente.kilowatt_ora - lett_precedente.kilowatt_ora AS consumo,
     lett_piu_recente.data AS data_lettura_piu_recente, lett_precedente.data AS
@@ -47,3 +33,8 @@ CREATE VIEW consumi AS SELECT DISTINCT qdc.codice_impianto,
     AND lett_precedente.data =
       data_lettura_piu_recente_rispetto_a_data(qdc.codice_impianto, lett_piu_recente.data)
 ;
+
+
+-- Testing della view
+\echo Test (view): consumi
+SELECT * FROM consumi;

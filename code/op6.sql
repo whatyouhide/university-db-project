@@ -22,7 +22,7 @@
 -- risultati.
 
 CREATE OR REPLACE FUNCTION
-impianti_da_manut_in_mission(matr MatricolaOperatore, data date)
+impianti_da_manut_in_missione(matr MatricolaOperatore, data date)
 RETURNS table (
   tipo_intervento_effettuato TipoIntervento,
   data_intervento date,
@@ -52,3 +52,8 @@ WHERE
 ORDER BY impianto.tipo_intervento_richiesto;
 
 $body$ language sql;
+
+
+-- Testing della funzione
+\echo Test (funzione): impianti_da_manut_in_missione
+SELECT * FROM impianti_da_manut_in_missione('77', '2014-12-01');

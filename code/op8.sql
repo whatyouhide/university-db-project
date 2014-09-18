@@ -53,3 +53,9 @@ ORDER BY dist ASC
 LIMIT lim;
 
 $body$ language sql;
+
+
+-- Testing della funzione
+\echo Test (funzione): qdc_con_sufficienti_uscite_libere
+SELECT * FROM qdc_con_sufficienti_uscite_libere('(32.43222, 11.32533)', 3);
+SELECT * FROM qdc_con_sufficienti_uscite_libere('(32.43222, 11.32533)', 1, 100);

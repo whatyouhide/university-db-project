@@ -26,3 +26,8 @@ CREATE VIEW lampioni_che_necessitano_manutenzione AS
   FROM impianto AS lamp
   JOIN impianto AS attrped ON attrped.codice_lampione = lamp.codice
   WHERE lamp.tipo = 'lampione' AND lamp.tipo_intervento_richiesto IS NOT NULL;
+
+
+-- Testing della view
+\echo Test (view): lampioni_che_necessitano_manutenzione
+SELECT * FROM lampioni_che_necessitano_manutenzione;

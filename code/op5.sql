@@ -30,3 +30,8 @@ CREATE VIEW quadri_che_necessitano_lettura AS
     date_trunc('month', lettura.data) < date_trunc('month', CURRENT_DATE)
 
   GROUP BY qdc.codice_impianto;
+
+
+-- Testing della view
+\echo Test (view): quadri_che_necessitano_lettura
+SELECT * FROM quadri_che_necessitano_lettura;

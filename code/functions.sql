@@ -46,3 +46,19 @@ BEGIN
   RETURN (totali - occupate)::smallint;
 END;
 $body$ language plpgsql;
+
+
+-- Trova la data della lettura più recente rispetto a una data passata come
+-- argomento. La lettura si riferisce a un determinato quadro, anch'esso passato
+-- come argomento.
+CREATE OR REPLACE FUNCTION data_lettura_piu_recente_rispetto_a_data(c CodiceImpianto, d date)
+RETURNS date AS $body$
+BEGIN
+  return (
+    SELECT data FROM lettura
+    WHERE codice_impianto = $1 AND data < $2
+    ORDER BY data
+    DESC LIMIT 1
+  );
+END;
+$body$ language plpgsql;

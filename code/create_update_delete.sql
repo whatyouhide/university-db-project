@@ -133,7 +133,7 @@ VALUES
   ('attrped1', '12', '2014-09-10', 'ispezione', NULL),
   ('qdc1', '94', '2014-02-02', 'censimento', 'Censimento e lettura quadro'),
   ('lamp2', '77', '2014-12-01', 'ispezione', NULL),
-  ('ss1', 77, '2014-12-01', 'installazione', NULL),
+  ('ss1', '77', '2014-12-01', 'installazione', NULL),
   ('lamp1', '94', '2014-09-26', 'manutenzione', 'Riparato danno al sostegno');
 
 

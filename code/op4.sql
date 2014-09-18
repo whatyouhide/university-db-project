@@ -60,3 +60,8 @@ WHERE
   AND intervento.tipo = 'censimento';
 
 $body$ language sql;
+
+
+-- Testing dei risultati.
+\echo Test (funzione): impianti_per_qdc_in_missione
+SELECT * FROM impianti_per_qdc_in_missione('94', '2014-02-02');
