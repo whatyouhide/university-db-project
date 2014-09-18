@@ -341,6 +341,12 @@ della lettura (attributo `kilowatt_ora` dell'associazione "lettura") ma anche
 sulla missione in cui è stata effettuata la lettura -- e di conseguenza la data
 della lettura -- e l'operatore che ha effettuato la lettura.
 
+**Vincolo** discutendo con il cliente, si è giunti alla conclusione che può
+essere effettuata solo una lettura durante lo stesso giorno sullo stesso quadro;
+si introduce dunque il vincolo che impone che non possano esistere due missioni
+effettuate nello stesso giorno che partecipino all'associazione "lettura" con lo
+stesso "quadro di controllo".
+
 ![](images/associazione-lettura.png)
 
 #### Associazione tra "missione" e "operatore"

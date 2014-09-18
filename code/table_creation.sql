@@ -137,11 +137,15 @@ CREATE TABLE lettura(
   data date,
   codice_impianto CodiceImpianto,
   kilowatt_ora double precision,
+
   PRIMARY KEY (matricola_operatore, data, codice_impianto),
 
   FOREIGN KEY (matricola_operatore, data)
   REFERENCES missione(matricola_operatore, data),
 
   FOREIGN KEY (codice_impianto)
-  REFERENCES quadro_di_controllo(codice_impianto)
+  REFERENCES quadro_di_controllo(codice_impianto),
+
+  -- RVF12
+  CONSTRAINT cnstr_no_letture_stesso_giorno UNIQUE(data, codice_impianto)
 );

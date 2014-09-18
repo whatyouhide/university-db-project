@@ -43,3 +43,11 @@ relazione "controllo", ma solo in qualità di altro estremo della relazione
 - `"installazione"`
 - `"manutenzione"`
 - `"ispezione"`
+
+##### RV6
+
+Non possono esistere due istanze dell'entità "missione" che:
+
+1. abbiano lo stesso valore per l'attributo `data`
+2. partecipino alla relazione "lettura" con la stessa istanza di "quadro di
+    controllo"

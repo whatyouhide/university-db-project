@@ -17,8 +17,20 @@ INSERT INTO impianto VALUES (
 );
 COMMIT;
 
+BEGIN TRANSACTION;
+INSERT INTO quadro_di_controllo VALUES ('qdc2', 3, 'buono');
 INSERT INTO impianto VALUES (
-  'lamp1', 'lampione', 'qdc1', NULL, -- codice, tipo, quadro, lampione
+  'qdc2', 'quadro di controllo', NULL, NULL, -- codice, tipo, controllato_da, lampione
+  '(39.136523, 19.142443)', 485, -- lon_lat, altezza
+  'Si sono danneggiati degli interruttori', 'sostituzione pezzi', -- intervento
+  'palo a terra', 'ottimo', -- sostegno
+  'linea trifase', 'buono', false, -- linea el. di alimentazione
+  'piazza di spagna', '843a', 'Roma', 'RM' --indirizzo
+);
+COMMIT;
+
+INSERT INTO impianto VALUES (
+  'lamp1', 'lampione', 'qdc2', NULL, -- codice, tipo, quadro, lampione
   '(43.211234, 12.421341)', 100, -- lon_lat, altezza
   'Si è danneggiato il sostegno a causa del maltempo', 'manutenzione', -- intervento
   'palo a terra', 'danneggiato', -- sostegno
@@ -59,8 +71,9 @@ INSERT INTO telefono(matricola_operatore, numero) VALUES
 
 -- Associamo delle missioni agli operatori creati.
 INSERT INTO missione(matricola_operatore, data) VALUES
-  ('12', '2014-11-01'), ('12', '2014-09-26'), ('94', '2014-12-25'),
-  ('94', '2014-09-26'), ('94', '2014-02-02'), ('12', '2014-09-10');
+  ('12', '2014-09-26'), ('94', '2014-09-26'), ('94', '2014-02-02'),
+  ('12', '2014-02-02'), ('12', '2014-09-10'), ('12', '2014-06-22'),
+  ('12', '2014-07-31'), ('12', '2014-11-01'), ('94', '2014-12-25');
 -- Correggiamo la data alla missione del 2014-12-25
 UPDATE missione
 SET data = '2014-02-25'
@@ -83,4 +96,7 @@ VALUES
 INSERT INTO lettura(matricola_operatore, data, codice_impianto, kilowatt_ora)
 VALUES
   ('94', '2014-02-02', 'qdc1', 33.0232312),
-  ('94', '2014-02-25', 'qdc1', 41.0002329);
+  ('12', '2014-06-22', 'qdc1', 44.3222441),
+  ('94', '2014-02-25', 'qdc1', 41.0002329),
+  ('94', '2014-02-02', 'qdc2', 26.2472345),
+  ('12', '2014-07-31', 'qdc2', 51.5382743);

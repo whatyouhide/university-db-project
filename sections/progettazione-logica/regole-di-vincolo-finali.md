@@ -94,3 +94,11 @@ estremo della relazione.
 Italiana: deve essere lunga due caratteri maiuscoli e deve essere compresa nella
 lista di province italiane. Per la lista di province si rimanda al codice SQL
 che implementa questo vincolo.
+
+#### RVF12
+
+(derivato da **RV6**)
+
+Non possono esistere due missioni che abbiano lo stesso valore di `data` e
+partecipino entrambe all'associazione "lettura" con lo stesso "quadro di
+controllo".

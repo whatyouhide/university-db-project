@@ -90,3 +90,6 @@ ciascuna operazione.
 
 <<(code/op3.sql)
 <<(code/op4.sql)
+<<(code/op5.sql)
+<<(code/op6.sql)
+<<(code/op7.sql)
