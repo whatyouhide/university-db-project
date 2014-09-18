@@ -29,13 +29,22 @@ INSERT INTO impianto VALUES (
 );
 COMMIT;
 
+-- Creiamo due lampioni.
 INSERT INTO impianto VALUES (
   'lamp1', 'lampione', 'qdc2', NULL, -- codice, tipo, quadro, lampione
-  '(43.211234, 12.421341)', 100, -- lon_lat, altezza
+  '(43.211234, 12.421341)', 300, -- lon_lat, altezza
   'Si è danneggiato il sostegno a causa del maltempo', 'manutenzione', -- intervento
   'palo a terra', 'danneggiato', -- sostegno
   'linea bifase', 'buono', false, -- linea el. di alimentazione
   'via carducci', '33bis', 'L''aquila', 'AQ' -- indirizzo
+);
+INSERT INTO impianto VALUES (
+  'lamp2', 'lampione', 'qdc1', NULL, -- codice, tipo, quadro, lampione
+  '(24.584934, 17.784951)', 320, -- lon_lat, altezza
+  NULL, NULL, -- intervento
+  'palo a terra', 'eccellente', -- sostegno
+  'linea bifase', 'buono', false, -- linea el. di alimentazione
+  'via XX Settembre', '3', 'L''aquila', 'AQ' -- indirizzo
 );
 
 INSERT INTO sorgente_di_illuminazione(

@@ -8,3 +8,5 @@
 \ir op5.sql
 \ir op6.sql
 \ir op7.sql
+\ir op8.sql
+\ir op9.sql
