@@ -63,7 +63,7 @@ INSERT INTO missione(matricola_operatore, data) VALUES
   ('94', '2014-09-26'), ('94', '2014-02-02'), ('12', '2014-09-10');
 -- Correggiamo la data alla missione del 2014-12-25
 UPDATE missione
-SET data = '2014-12-15'
+SET data = '2014-02-25'
 WHERE matricola_operatore = '94' AND data = '2014-12-25';
 -- Cancelliamo la missione del 2014-11-01.
 DELETE FROM missione WHERE matricola_operatore = '12' AND data = '2014-11-01';
@@ -73,7 +73,7 @@ DELETE FROM missione WHERE matricola_operatore = '12' AND data = '2014-11-01';
 INSERT INTO
   intervento(codice_impianto, matricola_operatore, data, tipo, descrizione)
 VALUES
-  ('attrped1', '94', '2014-12-15', 'censimento', NULL),
+  ('attrped1', '94', '2014-02-25', 'censimento', NULL),
   ('attrped1', '12', '2014-09-10', 'ispezione', NULL),
   ('qdc1', '94', '2014-02-02', 'censimento', 'Censimento e lettura quadro'),
   ('lamp1', '94', '2014-09-26', 'manutenzione', 'Riparato danno al sostegno');
@@ -81,4 +81,6 @@ VALUES
 
 -- Creiamo delle letture.
 INSERT INTO lettura(matricola_operatore, data, codice_impianto, kilowatt_ora)
-VALUES ('94', '2014-02-02', 'qdc1', 33.0232312);
+VALUES
+  ('94', '2014-02-02', 'qdc1', 33.0232312),
+  ('94', '2014-02-25', 'qdc1', 41.0002329);

@@ -133,7 +133,7 @@ connessi.
 *Operazione 5*: all'approssimarsi della scadenza mensile (fine del mese), si
 **deve** produrre la lista di tutti i quadri di controllo per i quali è ancora
 necessario effettuare la lettura del consumo, ovvero per i quali non è ancora
-disponibile una lettura effettuata nel mese in corso
+disponibile una lettura effettuata nel mese in corso.
 
 *Operazione 7*: mensilmente si vuole calcolare il consumo registrato da ogni
 quadro di controllo (risultante dalla differenza tra la lettura più recente e

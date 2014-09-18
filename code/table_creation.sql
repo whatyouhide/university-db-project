@@ -143,5 +143,5 @@ CREATE TABLE lettura(
   REFERENCES missione(matricola_operatore, data),
 
   FOREIGN KEY (codice_impianto)
-  REFERENCES impianto(codice)
+  REFERENCES quadro_di_controllo(codice_impianto)
 );
