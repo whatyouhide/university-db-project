@@ -5,7 +5,7 @@
 -- che la precede).
 
 
-
+-- TODO rivedere se va tutto bene
 CREATE OR REPLACE FUNCTION data_lettura_piu_recente_rispetto_a_data(c CodiceImpianto, d date)
 RETURNS date AS $body$
 BEGIN

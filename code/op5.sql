@@ -18,14 +18,15 @@
 
 CREATE VIEW quadri_che_necessitano_lettura AS
   SELECT
-    quadro_di_controllo.codice_impianto AS quadro,
+    qdc.codice_impianto AS quadro,
     max(lettura.data) AS ultima_lettura
 
   FROM lettura
 
-  JOIN quadro_di_controllo
-    ON lettura.codice_impianto = quadro_di_controllo.codice_impianto
+  JOIN quadro_di_controllo AS qdc
+    ON lettura.codice_impianto = qdc.codice_impianto
 
-  WHERE date_trunc('month', lettura.data) < date_trunc('month', CURRENT_DATE)
+  WHERE
+    date_trunc('month', lettura.data) < date_trunc('month', CURRENT_DATE)
 
-  GROUP BY quadro_di_controllo.codice_impianto;
+  GROUP BY qdc.codice_impianto;

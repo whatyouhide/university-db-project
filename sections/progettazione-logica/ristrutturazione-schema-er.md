@@ -29,7 +29,11 @@ Per convenzione, assumeremo che un impianto *ha bisogno di un intervento di
 manutenzione* quando l'attributo `impianto.tipo_intervento_richiesto` non ha il
 valore nullo.
 
-Di viene raffigurata l'entità "impianto" aggiornata alla modifica appena
+**Vincolo** si definisce il vincolo che impone che, per una data istanza di
+impianto, `impianto.tipo_intervento_richiesto` può essere nullo *se e solo se* è
+nullo anche `impianto.descrizione_intervento_richiesto` per lo stesso impianto.
+
+Di seguito viene raffigurata l'entità "impianto" aggiornata alla modifica appena
 discussa; lo schema ER completo non viene riportato di nuovo per brevità.
 
 ![](images/entita-impianto-con-manutenzione.png)

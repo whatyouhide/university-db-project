@@ -102,3 +102,9 @@ che implementa questo vincolo.
 Non possono esistere due missioni che abbiano lo stesso valore di `data` e
 partecipino entrambe all'associazione "lettura" con lo stesso "quadro di
 controllo".
+
+#### RVF13
+
+Per una data istanza di "impianto", l'attributo `tipo_intervento_richiesto` può
+essere nullo se e solo se lo è anche l'attributo
+`descrizione_intervento_richiesto`.

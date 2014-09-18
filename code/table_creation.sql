@@ -52,6 +52,14 @@ ADD CONSTRAINT cnstr_no_qdc CHECK (NOT check_impianto_e_qdc(codice_impianto));
 ALTER TABLE impianto
   ADD FOREIGN KEY (controllato_da) REFERENCES quadro_di_controllo(codice_impianto);
 
+-- RVF13
+-- TODO commentare e riposizionare insieme agli altri
+ALTER TABLE impianto ADD CONSTRAINT cnstr_tipo_e_descrizione CHECK (
+  tipo_intervento_richiesto IS NULL AND descrizione_intervento_richiesto IS NULL
+  OR
+  tipo_intervento_richiesto IS NOT NULL AND descrizione_intervento_richiesto IS NOT NULL
+);
+
 -- RFV3
 -- TODO commentare
 ALTER TABLE impianto ADD CONSTRAINT check_impianto_e_qdc CHECK (

@@ -1,6 +1,6 @@
 -- Impianti.
 
--- Inserimento.
+-- TODO commentare questo file in generale.
 
 -- TODO commentare questa cosa che bisogna inserire prima il quadro di controllo
 -- e poi l'impianto associato (deferred + check function che non può essere
@@ -8,7 +8,8 @@
 BEGIN TRANSACTION;
 INSERT INTO quadro_di_controllo VALUES ('qdc1', 10, 'ottimo');
 INSERT INTO impianto VALUES (
-  'qdc1', 'quadro di controllo', NULL, NULL, -- codice, tipo, controllato_da, lampione
+  'qdc1', 'quadro di controllo', -- codice, tipo
+  NULL, NULL, -- controllato_da, lampione
   '(33.132523, 11.142633)', 485, -- lon_lat, altezza
   NULL, NULL, -- intervento
   'immerso in pozzetto', 'ottimo', -- sostegno
@@ -20,7 +21,8 @@ COMMIT;
 BEGIN TRANSACTION;
 INSERT INTO quadro_di_controllo VALUES ('qdc2', 3, 'buono');
 INSERT INTO impianto VALUES (
-  'qdc2', 'quadro di controllo', NULL, NULL, -- codice, tipo, controllato_da, lampione
+  'qdc2', 'quadro di controllo', -- codice, tipo
+  NULL, NULL, -- controllato_da, lampione
   '(39.136523, 19.142443)', 485, -- lon_lat, altezza
   'Si sono danneggiati degli interruttori', 'sostituzione pezzi', -- intervento
   'palo a terra', 'ottimo', -- sostegno
@@ -31,7 +33,8 @@ COMMIT;
 
 -- Creiamo due lampioni.
 INSERT INTO impianto VALUES (
-  'lamp1', 'lampione', 'qdc2', NULL, -- codice, tipo, quadro, lampione
+  'lamp1', 'lampione', -- codice, tipo
+  'qdc2', NULL, -- quadro, lampione
   '(43.211234, 12.421341)', 300, -- lon_lat, altezza
   'Si è danneggiato il sostegno a causa del maltempo', 'manutenzione', -- intervento
   'palo a terra', 'danneggiato', -- sostegno
@@ -39,7 +42,8 @@ INSERT INTO impianto VALUES (
   'via carducci', '33bis', 'L''aquila', 'AQ' -- indirizzo
 );
 INSERT INTO impianto VALUES (
-  'lamp2', 'lampione', 'qdc1', NULL, -- codice, tipo, quadro, lampione
+  'lamp2', 'lampione', -- codice, tipo
+  'qdc1', NULL, -- quadro, lampione
   '(24.584934, 17.784951)', 320, -- lon_lat, altezza
   NULL, NULL, -- intervento
   'palo a terra', 'eccellente', -- sostegno

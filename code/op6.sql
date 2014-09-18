@@ -22,7 +22,7 @@
 -- risultati.
 
 CREATE OR REPLACE FUNCTION
-impianti_in_missione_con_interventi_di_manutenzione(matr MatricolaOperatore, data date)
+impianti_da_manut_in_mission(matr MatricolaOperatore, data date)
 RETURNS table (
   tipo_intervento_effettuato TipoIntervento,
   data_intervento date,

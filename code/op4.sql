@@ -3,6 +3,7 @@
 -- Per ogni quadro di controllo che dovrà essere censito in una data missione,
 -- si dovrà produrre la lista di tutti gli impianti a esso connessi.
 
+
 -- Per questa operazione creiamo la funzione impianti_per_qdc_in_missione(), che
 -- prende in input la coppia (matricola_operatore, data) che identifica una data
 -- missione e seleziona gli impianti secondo i criteri descritti

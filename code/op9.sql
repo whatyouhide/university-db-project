@@ -14,6 +14,7 @@
 -- lampioni che effettivamente illuminano un attraversamento pedonale. In questo
 -- modo si possono ottenere anche informazioni sull'attraversamento pedonale
 -- stesso, che vengono incluse nelle colonne risultanti dalla query.
+
 CREATE VIEW lampioni_che_necessitano_manutenzione AS
   SELECT
     lamp.codice AS codice_lampione,
