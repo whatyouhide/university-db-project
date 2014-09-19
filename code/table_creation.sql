@@ -5,7 +5,7 @@ CREATE TABLE impianto(
   -- Nota: REFERENCES è aggiunto in seguito, quando la relazione
   -- quadro_di_controllo sarà stata creata.
   controllato_da CodiceImpianto,
-  codice_lampione CodiceImpianto REFERENCES impianto(codice),
+  codice_lampione CodiceImpianto,
   lon_lat point,
   altezza integer,
   installato boolean,
@@ -20,6 +20,12 @@ CREATE TABLE impianto(
   ind_numero_civico_di_riferimento varchar(10),
   ind_comune varchar(100),
   ind_provincia Provincia,
+
+  -- Se il codice di un lampione viene aggiornato, propaghiamo l'aggiornamento.
+  -- Se un lampione viene distrutto, settiamo le foreign key a NULL.
+  FOREIGN KEY (codice_lampione)
+    REFERENCES impianto(codice)
+    ON UPDATE CASCADE ON DELETE SET NULL,
 
   -- RVF13
   CONSTRAINT cnstr_tipo_e_descrizione CHECK (
@@ -51,7 +57,13 @@ CREATE TABLE sorgente_di_illuminazione(
   da_sostituire boolean,
   tipo_lampada varchar(100),
   stato_di_conservazione varchar(200),
-  codice_impianto CodiceImpianto REFERENCES impianto(codice)
+  codice_impianto CodiceImpianto,
+
+  -- Se l'impianto a cui appartengono delle sorgenti di illuminazione viene
+  -- distrutto, distruggiamo anche tutte le sorgenti di illuminazione associate.
+  FOREIGN KEY (codice_impianto)
+    REFERENCES impianto(codice)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -79,8 +91,13 @@ CREATE TABLE quadro_di_controllo(
   numero_uscite smallint,
   stato_di_funzionamento varchar(200),
 
+  -- Se l'impianto associato a un quadro di controllo viene distrutto, anche il
+  -- quadro di controllo sarà distrutto (non può esistere un quadro di controllo
+  -- senza un impianto associato).
   FOREIGN KEY (codice_impianto)
-    REFERENCES impianto(codice) DEFERRABLE INITIALLY DEFERRED
+    REFERENCES impianto(codice)
+    ON UPDATE CASCADE ON DELETE CASCADE
+    DEFERRABLE INITIALLY DEFERRED
 );
 
 
@@ -106,9 +123,16 @@ ALTER TABLE sorgente_di_illuminazione ADD CONSTRAINT cnstr_no_qdc CHECK (
 -- relazione `impianto`. Lo facciamo qui e non durante la creazione della
 -- tabella `impianto` in quanto in quel momento la relazione
 -- `quadro_di_controllo` ancora non era stata creata.
+--
+-- Con l'azione ON DELETE SET NULL specifichiamo che, se si prova a distruggere
+-- un quadro di controllo referenziato da almeno un impianto (quadro di
+-- controllo che controlla l'impianto), il database blocca l'operazione e non
+-- permette la distruzione in quanto un impianto deve essere necessariamente
+-- controllato da un quadro di controllo.
 ALTER TABLE impianto
   ADD FOREIGN KEY (controllato_da)
-  REFERENCES quadro_di_controllo(codice_impianto);
+  REFERENCES quadro_di_controllo(codice_impianto)
+  ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
 -- Operatori.
@@ -131,8 +155,11 @@ CREATE TABLE missione(
 
   PRIMARY KEY (matricola_operatore, data),
 
+  -- Non viene permesso di distruggere un operatore se ci sono missioni che lo
+  -- referenziano.
   FOREIGN KEY (matricola_operatore)
-  REFERENCES operatore(matricola) ON DELETE SET NULL
+    REFERENCES operatore(matricola)
+    ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
 
@@ -143,8 +170,11 @@ CREATE TABLE telefono(
 
   PRIMARY KEY (matricola_operatore, numero),
 
+  -- Se un operatore viene distrutto, vengono distrutti anche tutti i numeri di
+  -- telefono ad esso associati.
   FOREIGN KEY (matricola_operatore)
-  REFERENCES operatore(matricola) ON DELETE CASCADE
+    REFERENCES operatore(matricola)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -158,11 +188,17 @@ CREATE TABLE intervento(
 
   PRIMARY KEY (codice_impianto, matricola_operatore, data),
 
+  -- Una missione non può essere distrutta se essa è referenziata da un
+  -- intervento.
   FOREIGN KEY (matricola_operatore, data)
-  REFERENCES missione(matricola_operatore, data) ON DELETE RESTRICT,
+    REFERENCES missione(matricola_operatore, data)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
 
+  -- Un impianto non può essere distrutto se esso è referenziato da un
+  -- intervento.
   FOREIGN KEY (codice_impianto)
-  REFERENCES impianto(codice) ON DELETE SET NULL
+    REFERENCES impianto(codice)
+    ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
 
@@ -175,11 +211,16 @@ CREATE TABLE lettura(
 
   PRIMARY KEY (matricola_operatore, data, codice_impianto),
 
+  -- Una missione non può essere distrutta se referenziata da una lettura.
   FOREIGN KEY (matricola_operatore, data)
-  REFERENCES missione(matricola_operatore, data),
+    REFERENCES missione(matricola_operatore, data)
+    ON UPDATE CASCADE ON DELETE SET NULL,
 
+  -- Un impianto non può essere distrutto se esso è referenziato da una
+  -- lettura.
   FOREIGN KEY (codice_impianto)
-  REFERENCES quadro_di_controllo(codice_impianto),
+    REFERENCES quadro_di_controllo(codice_impianto)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
 
   -- RVF12
   CONSTRAINT cnstr_no_letture_stesso_giorno UNIQUE(data, codice_impianto)

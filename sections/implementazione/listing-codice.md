@@ -25,6 +25,7 @@ psql -f code/all.sql 'nome-database-fittizio, di solito `template1`'
 Questo script è il primo che viene eseguito e dunque esegue operazioni di base
 come creazione del database e connessione ad esso.
 
+- impostazione di alcune opzione di PostgreSQL
 - distruzione del database `illuminazione_pubblica` se presente in precedenza,
     in modo da poter partire con una "tavola bianca"
 - creazione del database `illuminazione_pubblica` e connessione ad esso
