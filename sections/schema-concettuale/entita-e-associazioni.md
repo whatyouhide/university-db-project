@@ -136,8 +136,8 @@ valore nullo.
 ![](images/entita-impianto.png)
 
 #### Gerarchia con radice "impianto"
-o
-La frase:
+
+La frase
 
 > Il sistema deve raccogliere informazioni relative alla posizione e allo stato
 > di manutenzione e operativo di una serie di impianti quali: 200.000 lampioni,
@@ -221,8 +221,8 @@ essere quadri di controllo.
 
 La frase 
 
-> Si consideri che ogni quadro mediamente 20 impianti di illuminazione mentre
-> ogni centralina semaforica controlla mediamente 4 semafori.
+> Si consideri che ogni quadro controlla mediamente 20 impianti di illuminazione
+> mentre ogni centralina semaforica controlla mediamente 4 semafori.
 
 suggerirebbe che "centralina semaforica" sia un concetto diverso (se pur
 fortemente correlato) da "quadro di controllo".

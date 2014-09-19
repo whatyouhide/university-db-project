@@ -149,7 +149,7 @@ istanze di impianto che siano controllate dal quadro di controllo in questione.
 
 Questo significa che ogni volta che vogliamo sapere il numero di uscite libere
 di un impianto dobbiamo effettuare un accesso in lettura con una query di tipo
-`COUNT()`. L'operazione non è onerosa e viene eseguita, supponendo che venga
+`COUNT()`. L'operazione non è onerosa e veerrebbe eseguita, supponendo che venga
 eseguita solo in relazione all'*operazione 8*, con frequenza piuttosto rada
 (mensilmente).
 
@@ -161,11 +161,11 @@ questo numero (in PostgreSQL si tratta di uno `smallint`), e avendo 20.000
 quadri di controllo nella base di dati, il volume aggiuntivo consisterebbe in
 40kb di dati.
 
-Oltre al volume aggiuntivo, un altro aspetto da tenere in considerazione è la
-necessità di mantenere aggiornato questo valore. Per farlo bisognerebbe creare
-un *trigger* (che scatti all'inserimento, modifica o rimozione di un impianto
-controllato da un quadro di controllo) che aggiorni il numero delle uscite
-libere.
+Oltre al volume aggiuntivo, un altro aspetto da tenere in considerazione sarebbe
+la necessità di mantenere aggiornato questo valore. Per farlo bisognerebbe
+creare un *trigger* (che scatti all'inserimento, modifica o rimozione di un
+impianto controllato da un quadro di controllo) che aggiorni il numero delle
+uscite libere.
 
 Dopo questa analisi si è deciso di non utilizzare l'attributo aggiuntivo
 `uscite_libere` in quanto la query da eseguire per ricavare questo valore

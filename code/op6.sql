@@ -6,6 +6,7 @@
 -- impianti che richiedono interventi di manutenzione, in base alla tipologia di
 -- intervento.
 
+
 -- Per realizzare questa operazione si è sviluppata una funzione che in input
 -- accetta una chiave primaria della relazione `missione`, ossia una coppia
 -- (matricola operatore, data).
@@ -48,6 +49,7 @@ JOIN impianto ON
 WHERE
   missione.data = $2
   AND missione.matricola_operatore = $1
+  AND (intervento.tipo = 'censimento' OR intervento.tipo = 'ispezione')
   AND impianto.tipo_intervento_richiesto IS NOT NULL
 ORDER BY impianto.tipo_intervento_richiesto;
 

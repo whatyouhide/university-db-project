@@ -18,6 +18,8 @@ etc.) con il solo comando:
 psql -f code/all.sql 'nome-database-fittizio, di solito `template1`'
 ```
 
+Segue il contenuto dello script.
+
 <<(code/all.sql)
 
 #### `bootstrap.sql`
@@ -96,3 +98,11 @@ ciascuna operazione.
 <<(code/op7.sql)
 <<(code/op8.sql)
 <<(code/op9.sql)
+
+#### `etc.sql`
+
+In questo script sono contenute azioni descritte informalmente nei requisiti
+(non sono tra le operazioni descritte né fanno parte di operazioni di
+creazione/modifica/cancellazione di oggetti del database.
+
+<<(code/etc.sql)

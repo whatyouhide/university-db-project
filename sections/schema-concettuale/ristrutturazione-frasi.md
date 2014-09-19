@@ -28,8 +28,8 @@ essere caratterizzato da:
 - caratteristiche delle sorgenti di illuminazione
 - altezza alla quale è montato l'impianto
 
-Si **deve** conoscere quali sono gli impianti associati (controllati) da ogni
-quadro di controllo.
+Si **deve** conoscere quali sono gli impianti controllati da ogni quadro di
+controllo.
 
 Ogni quadro di controllo controlla mediamente 20 impianti, mentre ogni
 "centralina semaforica" (quadro che controlla soltanto semafori) controlla

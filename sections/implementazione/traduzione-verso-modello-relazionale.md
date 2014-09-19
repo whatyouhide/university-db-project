@@ -32,10 +32,10 @@ individuato come `impianto.sost_tipo`.
 
 - **impianto** (<u>codice</u>, lon_lat, altezza, tipo, *codice_lampione*,
     descrizione_intervento_richiesto, tipo_intervento_richiesto, sost_tipo,
-    sost_stato_di_conservazione, ind_via, ind_numero_civico_di_riferimento,
-    ind_comune, ind_provincia, alim_tipo_alimentazione,
-    alim_stato_di_conservazione, alim_in_pozzetto_di_derivazione, installato,
-    *controllato_da*) [*nota 1*]
+    sost_stato_di_conservazione, sost_materiale, ind_via,
+    ind_numero_civico_di_riferimento, ind_comune, ind_provincia,
+    alim_tipo_alimentazione, alim_stato_di_conservazione,
+    alim_in_pozzetto_di_derivazione, installato, *controllato_da*) [*nota 1*]
 - **sorgente_di_illuminazione** (<u>id</u>, da_sostituire, tipo_lampada,
     stato_di_conservazione, *codice_impianto*)
 - **quadro_di_controllo** (<u>*codice_impianto*</u>, numero_uscite,

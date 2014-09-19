@@ -13,6 +13,7 @@ CREATE TABLE impianto(
   tipo_intervento_richiesto varchar(200),
   sost_tipo TipoSostegno,
   sost_stato_di_conservazione varchar(200),
+  sost_materiale varchar(200),
   alim_tipo_alimentazione TipoLineaElettricaDiAlimentazione,
   alim_stato_di_conservazione varchar(200),
   alim_in_pozzetto_di_derivazione boolean,

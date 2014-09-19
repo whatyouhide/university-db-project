@@ -10,7 +10,7 @@ INSERT INTO impianto VALUES (
   NULL, NULL, -- controllato_da, lampione
   '(33.132523, 11.142633)', 130, true, -- lon_lat, altezza, installato
   NULL, NULL, -- intervento
-  'immerso in pozzetto', 'ottimo', -- sostegno
+  'immerso in pozzetto', 'ottimo', 'cemento', -- sostegno
   'linea trifase', 'buono', false, -- linea el. di alimentazione
   'Corso Vittorio Emanuele', '1110', 'Milano', 'MI' --indirizzo
 );
@@ -23,7 +23,7 @@ INSERT INTO impianto VALUES (
   NULL, NULL, -- controllato_da, lampione
   '(39.136523, 19.142443)', -102, true, -- lon_lat, altezza, installato
   'Si sono danneggiati degli interruttori', 'sostituzione pezzi', -- intervento
-  'palo a terra', 'ottimo', -- sostegno
+  'palo a terra', 'ottimo', 'cemento', -- sostegno
   'linea trifase', 'buono', false, -- linea el. di alimentazione
   'Piazza di Spagna', '843a', 'Roma', 'RM' --indirizzo
 );
@@ -36,7 +36,7 @@ INSERT INTO impianto VALUES (
   'qdc2', NULL, -- quadro, lampione
   '(43.211234, 12.421341)', 300, true, -- lon_lat, altezza, installato
   'Danneggiato il sostegno a causa del maltempo', 'manutenzione', -- intervento
-  'palo a terra', 'danneggiato', -- sostegno
+  'palo a terra', 'danneggiato', 'ferro', -- sostegno
   'linea bifase', 'buono', false, -- linea el. di alimentazione
   'Via Carducci', '33bis', 'L''Aquila', 'AQ' -- indirizzo
 );
@@ -45,7 +45,7 @@ INSERT INTO impianto VALUES (
   'qdc1', NULL, -- quadro, lampione
   '(24.584934, 17.784951)', 320, true, -- lon_lat, altezza, installato
   NULL, NULL, -- intervento
-  'palo a terra', 'eccellente', -- sostegno
+  'palo a terra', 'eccellente', 'ferro', -- sostegno
   'linea bifase', 'buono', false, -- linea el. di alimentazione
   'Via XX Settembre', '3', 'L''Aquila', 'AQ' -- indirizzo
 );
@@ -65,7 +65,7 @@ INSERT INTO impianto VALUES (
   'qdc1', 'lamp1', -- controllato_da, lampione
   '(43.211238, 12.421228)', 0, true, -- lon_lat, altezza, installato
   NULL, NULL, -- intervento
-  'staffa a muro', 'ottimo', -- sostegno
+  'staffa a muro', 'ottimo', 'plastica', -- sostegno
   'pannello solare', 'buono', false, -- linea el. di alimentazione
   'Via Rossi', '1', 'Miglianico', 'CH' -- indirizzo
 );
@@ -82,7 +82,7 @@ INSERT INTO impianto VALUES (
   'qdc1', NULL, -- controllato_da, lampione
   '(53.46383, 22.38483)', 230, false, -- lon_lat, altezza, installato
   NULL, NULL, -- intervento
-  'staffa a muro', NULL, -- sostegno
+  'staffa a muro', NULL, 'acciaio inossidabile', -- sostegno
   'linea trifase', NULL, false, -- linea el. di alimentazione
   'Via Cagliari', '341', 'Palermo', 'PA' -- indirizzo
 );

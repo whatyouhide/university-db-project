@@ -10,3 +10,4 @@
 \ir op7.sql
 \ir op8.sql
 \ir op9.sql
+\ir etc.sql

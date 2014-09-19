@@ -138,14 +138,14 @@ precedente).
 
 ##### Frasi relative a "semaforo"
 
-Si consideri che ogni quadro mediamente 20 impianti di illuminazione mentre ogni
-centralina semaforica controlla mediamente 4 semafori.
+Si consideri che ogni quadro controlla mediamente 20 impianti di illuminazione
+mentre ogni centralina semaforica controlla mediamente 4 semafori.
 
 ##### Frasi relative a "lampione"
 
 *Operazione 9*: ogni giorno bisogna produrre la lista di tutti i lampioni che
 illuminano attraversamenti pedonali e che hanno necessità di interventi di
-manutenzione. [vedi *nota* sotto *Frasi relative a "attraversamento pedonale"]
+manutenzione. [vedi *nota* sotto *Frasi relative a "attraversamento pedonale"*]
 
 ##### Frasi relative a "attraversamento pedonale"
 
