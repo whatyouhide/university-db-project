@@ -1,4 +1,5 @@
-# Basi di dati - laboratorio
+# Laboratorio di Basi di Dati
+## Progetto: Illuminazione pubblica
 ##### Andrea Leopardi (<an.leopardi@gmail.com>) - 202879
 
 ## Requisiti e operazioni
